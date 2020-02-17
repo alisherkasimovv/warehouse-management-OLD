@@ -1,13 +1,13 @@
-package uz.wh.warehousemanagement;
+package uz.wh;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WarehouseManagementApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WarehouseManagementApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
