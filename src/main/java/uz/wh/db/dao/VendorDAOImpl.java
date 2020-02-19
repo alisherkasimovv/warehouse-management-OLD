@@ -4,49 +4,49 @@ import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.VendorDAO;
 import uz.wh.db.entities.Vendor;
-import uz.wh.db.repositories.VenderRepository;
+import uz.wh.db.repositories.VendorRepository;
 
 import java.util.List;
 
 @Service
 public class VendorDAOImpl implements VendorDAO {
-    VenderRepository venderRepository;
+    VendorRepository vendorRepository;
 
-    public VendorDAOImpl(VenderRepository venderRepository) {
-        this.venderRepository = venderRepository;
+    public VendorDAOImpl(VendorRepository vendorRepository) {
+        this.vendorRepository = vendorRepository;
 
     }
 
     @Override
     public List<Vendor> getAll() {
-        return venderRepository.findAll();
+        return vendorRepository.findAll();
     }
 
     @Override
     public ObjectAndMessage saveEditVendor(Vendor vendor) {
         Vendor saved;
-        ObjectAndMessage vendorAndMessage = new ObjectAndMessage();
-        Vendor temp = venderRepository.findById(vendor.getId());
+        ObjectAndMessage objectAndMessage = new ObjectAndMessage();
+        Vendor temp = vendorRepository.findById(vendor.getId());
         if (temp != null) {
             temp.setDeleted(false);
             temp.setName(vendor.getName());
             temp.setPhone(vendor.getPhone());
             temp.setAddress(vendor.getAddress());
-            saved = venderRepository.save(temp);
-            vendorAndMessage.setMessage("Vendor has been updated!");
+            saved = vendorRepository.save(temp);
+            objectAndMessage.setMessage("Vendor has been updated!");
         } else {
-            saved = venderRepository.save(vendor);
-            vendorAndMessage.setMessage("Vendor has been created!");
+            saved = vendorRepository.save(vendor);
+            objectAndMessage.setMessage("Vendor has been created!");
         }
-        vendorAndMessage.setObject(saved);
-        return vendorAndMessage;
+        objectAndMessage.setObject(saved);
+        return objectAndMessage;
     }
 
     @Override
     public String deleteVendorById(int id) {
-        Vendor vendor = venderRepository.findById(id);
+        Vendor vendor = vendorRepository.findById(id);
         vendor.setDeleted(true);
-        venderRepository.save(vendor);
+        vendorRepository.save(vendor);
         return "Vendor was deleted!";
 
     }

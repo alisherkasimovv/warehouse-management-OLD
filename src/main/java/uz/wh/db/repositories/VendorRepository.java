@@ -5,7 +5,7 @@ import uz.wh.db.entities.Vendor;
 
 import java.util.List;
 
-public interface VenderRepository extends JpaRepository<Vendor,Integer> {
+public interface VendorRepository extends JpaRepository<Vendor,Integer> {
     List<Vendor> findAll();
     Vendor findById(int id);
 }

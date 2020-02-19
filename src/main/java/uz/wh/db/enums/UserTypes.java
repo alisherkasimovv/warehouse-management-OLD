@@ -1,6 +1,6 @@
 package uz.wh.db.enums;
 
-public enum UserType {
+public enum UserTypes {
     ADMIN,
     DIRECTOR,
     VENDOR,

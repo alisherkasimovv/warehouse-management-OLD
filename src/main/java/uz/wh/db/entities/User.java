@@ -4,20 +4,22 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import uz.wh.db.entities.base.BaseEntity;
-import uz.wh.db.enums.UserType;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.Collection;
+import java.util.List;
 
-import javax.persistence.*;
-
-@Entity(name = "db_users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
-
-public class User extends BaseEntity {
+@Entity(name = "db_users")
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "db_username", unique = true)
     private String username;
@@ -31,13 +33,37 @@ public class User extends BaseEntity {
     @Column(name = "db_lastname")
     private String lastName;
 
-    @Column(name = "db_phonenumber")
+    @Column(name = "db_phonenumber", unique = true, length = 13)
     private String phone;
 
     @Column(name = "db_address", nullable = false)
     private String address;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "db_usertype", nullable = false)
-    private UserType userType;
+    @ManyToMany
+    private List<Role> roles;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

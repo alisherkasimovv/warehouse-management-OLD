@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.UserAndMessage;
 import uz.wh.db.dao.interfaces.UserDAO;
 import uz.wh.db.entities.User;
-import uz.wh.db.enums.UserType;
+import uz.wh.db.enums.UserTypes;
 
 import java.util.List;
 
@@ -50,8 +50,8 @@ public class UserController {
     }
 
     @GetMapping("/getType")
-    public ResponseEntity<User> getUserByUserType(@PathVariable UserType userType) {
-        return new ResponseEntity<>(userDAO.getByUserType(userType), HttpStatus.OK);
+    public ResponseEntity<User> getUserByUserType(@PathVariable UserTypes userTypes) {
+        return new ResponseEntity<>(userDAO.getByUserType(userTypes), HttpStatus.OK);
     }
 
     @GetMapping("/getAddress")
