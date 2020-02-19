@@ -1,4 +1,4 @@
-package uz.wh.controller;
+package uz.wh.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
