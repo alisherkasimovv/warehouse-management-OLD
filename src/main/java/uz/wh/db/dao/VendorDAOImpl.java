@@ -27,27 +27,27 @@ public class VendorDAOImpl implements VendorDAO {
         Vendor saved;
         VendorAndMessage vendorAndMessage = new VendorAndMessage();
         Vendor temp = venderRepository.findById(vendor.getId());
-        if(temp != null){
+        if (temp != null) {
             temp.setDeleted(false);
             temp.setName(vendor.getName());
             temp.setPhone(vendor.getPhone());
             temp.setAddres(vendor.getAddres());
             saved = venderRepository.save(temp);
             vendorAndMessage.setMessage("Vendor has been updated!");
-        }else{
+        } else {
             saved = venderRepository.save(vendor);
             vendorAndMessage.setMessage("Vendor has been created!");
         }
         vendorAndMessage.setVendor(saved);
-        return  vendorAndMessage;
+        return vendorAndMessage;
     }
 
     @Override
     public String deleteVendorById(int id) {
         Vendor vendor = venderRepository.findById(id);
         vendor.setDeleted(true);
-        venderRepository.delete(vendor);
-        return "Cable was deleted!";
+        venderRepository.save(vendor);
+        return "Vendor was deleted!";
 
     }
 }

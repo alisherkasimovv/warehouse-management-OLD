@@ -19,16 +19,16 @@ public abstract class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private int id;
 
     @Column(name = "is_deleted")
     private Boolean deleted = false;
 
     @Column(name = "created_by")
-    private Integer createdBy;
+    private int createdBy;
 
     @Column(name = "updated_by")
-    private Integer updatedBy;
+    private int updatedBy;
 
     @Column(name = "created_at", updatable = false)
     private Date createdAt;
