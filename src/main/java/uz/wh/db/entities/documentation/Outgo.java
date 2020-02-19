@@ -12,25 +12,23 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "dacument_outgo")
+@Table(name = "document_outgo")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Outgo extends DocumentEntity {
 
-    @Column
+
     private String documentNo;
 
-    @Column
+
     private int customerId;
 
     @Nullable
-    @Column(name = "price")
     private double price;
 
 
-    @Column
     private double balance;
 
 }

@@ -43,11 +43,14 @@ public class VendorDAOImpl implements VendorDAO {
     }
 
     @Override
-    public String deleteVendorById(int id) {
+    public ObjectAndMessage deleteVendorById(int id) {
+        ObjectAndMessage objectAndMessage=new ObjectAndMessage ();
         Vendor vendor = vendorRepository.findById(id);
         vendor.setDeleted(true);
         vendorRepository.save(vendor);
-        return "Vendor was deleted!";
+        objectAndMessage.setObject(null);
+        objectAndMessage.setMessage("Vendor was deleted!");
+        return objectAndMessage;
 
     }
 }

@@ -3,6 +3,7 @@ package uz.wh.db.dao;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.UserAndMessage;
 import uz.wh.db.dao.interfaces.UserDAO;
+import uz.wh.db.entities.Role;
 import uz.wh.db.entities.User;
 import uz.wh.db.enums.UserTypes;
 import uz.wh.db.repositories.UserRepository;
@@ -35,11 +36,6 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public User getByUsername(String username) {
         return repository.findByUsername(username);
-    }
-
-    @Override
-    public User getByUserType(UserTypes userTypes) {
-        return repository.findByUserType(userTypes);
     }
 
     @Override
@@ -77,7 +73,6 @@ public class UserDAOImpl implements UserDAO {
             temp.setLastName(user.getLastName());
             temp.setAddress(user.getAddress());
             temp.setPhone(user.getPhone());
-            temp.setRoles(user.getRoles());
             saved = repository.save(temp);
             message.setMessage("User successfully saved!");
 

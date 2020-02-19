@@ -1,6 +1,7 @@
 package uz.wh.db.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import uz.wh.db.entities.Role;
 import uz.wh.db.entities.User;
 import uz.wh.db.enums.UserTypes;
 
@@ -14,8 +15,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findById(int id);
 
     User findByUsername(String username);
-
-    User findByUserType(UserTypes userTypes);
 
     User findByFirstName(String firstName);
 

@@ -1,6 +1,7 @@
 package uz.wh.db.dao.interfaces;
 
 import uz.wh.collections.UserAndMessage;
+import uz.wh.db.entities.Role;
 import uz.wh.db.entities.User;
 import uz.wh.db.enums.UserTypes;
 
@@ -15,8 +16,6 @@ public interface UserDAO {
     User getById(int id);
 
     User getByUsername(String username);
-
-    User getByUserType(UserTypes userTypes);
 
     User getByFirstName(String firstName);
 

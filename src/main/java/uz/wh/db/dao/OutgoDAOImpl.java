@@ -11,10 +11,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
-public class OutputDAOImpl implements OutgoDAO {
+public class OutgoDAOImpl implements OutgoDAO {
 
     OutgoRepository repository;
-    public OutputDAOImpl(OutgoRepository repository) {
+
+    public OutgoDAOImpl(OutgoRepository repository) {
         this.repository=repository;
 
     }
@@ -68,6 +69,6 @@ public class OutputDAOImpl implements OutgoDAO {
         objectAndMessage.setObject(null);
         repository.deleteById(id);
 
-        return null;
+        return objectAndMessage;
     }
 }
