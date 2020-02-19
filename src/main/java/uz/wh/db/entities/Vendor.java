@@ -19,13 +19,12 @@ import javax.persistence.Table;
 @Setter
 
 public class Vendor extends BaseEntity {
-    @Id
-    private int id;
+
     @Column
     private String name;
     @Column
     private String phone;
     @Column
-    private String addres;
+    private String address;
 
 }

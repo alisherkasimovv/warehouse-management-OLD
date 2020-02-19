@@ -1,7 +1,7 @@
 package uz.wh.db.dao;
 
 import org.springframework.stereotype.Service;
-import uz.wh.collections.VendorAndMessage;
+import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.VendorDAO;
 import uz.wh.db.entities.Vendor;
 import uz.wh.db.repositories.VenderRepository;
@@ -23,22 +23,22 @@ public class VendorDAOImpl implements VendorDAO {
     }
 
     @Override
-    public VendorAndMessage saveEditVendor(Vendor vendor) {
+    public ObjectAndMessage saveEditVendor(Vendor vendor) {
         Vendor saved;
-        VendorAndMessage vendorAndMessage = new VendorAndMessage();
+        ObjectAndMessage vendorAndMessage = new ObjectAndMessage();
         Vendor temp = venderRepository.findById(vendor.getId());
         if (temp != null) {
             temp.setDeleted(false);
             temp.setName(vendor.getName());
             temp.setPhone(vendor.getPhone());
-            temp.setAddres(vendor.getAddres());
+            temp.setAddress(vendor.getAddress());
             saved = venderRepository.save(temp);
             vendorAndMessage.setMessage("Vendor has been updated!");
         } else {
             saved = venderRepository.save(vendor);
             vendorAndMessage.setMessage("Vendor has been created!");
         }
-        vendorAndMessage.setVendor(saved);
+        vendorAndMessage.setObject(saved);
         return vendorAndMessage;
     }
 

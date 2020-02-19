@@ -7,13 +7,16 @@ import lombok.Setter;
 import uz.wh.db.entities.base.BaseEntity;
 import uz.wh.db.enums.UserType;
 
+
 import javax.persistence.*;
 
+@Entity(name = "db_users")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "db_users")
+
+
 public class User extends BaseEntity {
 
     @Column(name = "db_username", unique = true)
