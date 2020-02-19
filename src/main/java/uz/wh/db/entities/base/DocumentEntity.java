@@ -15,9 +15,8 @@ public abstract class DocumentEntity extends BaseEntity {
     private String reference;
 
     @Column(name = "order_date")
-    private LocalDateTime orderDate;
+    private LocalDateTime Date;
 
-    @Column(name = "user_id")
-    private int userId;
-
+    @Column
+    private boolean status;
 }

@@ -3,7 +3,7 @@ package uz.wh.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.wh.collections.VendorAndMessage;
+import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.VendorDAO;
 import uz.wh.db.entities.Vendor;
 
@@ -25,9 +25,9 @@ public class VendorController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<VendorAndMessage> saveVendor(@Valid @RequestBody Vendor vendor) {
-        VendorAndMessage vendorAndMessage = vendorDAO.saveEditVendor(vendor);
-        return new ResponseEntity<>(vendorAndMessage, HttpStatus.OK);
+    public ResponseEntity<ObjectAndMessage> saveVendor(@Valid @RequestBody Vendor vendor) {
+        ObjectAndMessage objectAndMessage = vendorDAO.saveEditVendor(vendor);
+        return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
     }
 
     @GetMapping(value = "/delete")

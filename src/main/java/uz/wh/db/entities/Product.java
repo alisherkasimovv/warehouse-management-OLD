@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import uz.wh.db.entities.base.BaseEntity;
 
+import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
 
-@MappedSuperclass
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

@@ -9,7 +9,7 @@ import uz.wh.db.entities.Vendor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class VendorAndMessage {
-    private Vendor vendor;
+public class ObjectAndMessage {
+    private Object object;
     private  String message;
 }

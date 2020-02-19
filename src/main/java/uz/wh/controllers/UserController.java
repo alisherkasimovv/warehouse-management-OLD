@@ -8,7 +8,6 @@ import uz.wh.db.dao.interfaces.UserDAO;
 import uz.wh.db.entities.User;
 import uz.wh.db.enums.UserType;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 @RestController
