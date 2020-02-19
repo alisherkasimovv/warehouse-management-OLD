@@ -26,7 +26,7 @@ public class IncomeController {
     }
 
     @RequestMapping(value = "/get/{documentNo}", method = RequestMethod.GET)
-    public ResponseEntity<Income> getOneOutgo(@PathVariable String documentNo) {
+    public ResponseEntity<Income> getDocumentNo(@PathVariable String documentNo) {
         return new ResponseEntity<>(incomeDAO.getByDocumentNo(documentNo), HttpStatus.OK);
     }
 
@@ -38,6 +38,11 @@ public class IncomeController {
     @PostMapping(value = "/save")
     public ResponseEntity<ObjectAndMessage> saveIncome(@Valid @RequestBody Income income) {
         ObjectAndMessage objectAndMessage = incomeDAO.save(income);
+        return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
+    }
+    @PostMapping(value = "/deleted")
+    public ResponseEntity<ObjectAndMessage> deleteIncome(@Valid @RequestBody int id) {
+        ObjectAndMessage objectAndMessage = incomeDAO.deleteById(id);
         return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
     }
 

@@ -8,5 +8,5 @@ import java.util.List;
 public interface VendorDAO {
     List<Vendor> getAll();
     ObjectAndMessage saveEditVendor(Vendor vendor);
-    String deleteVendorById(int id);
+    ObjectAndMessage deleteVendorById(int id);
 }

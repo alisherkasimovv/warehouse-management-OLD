@@ -1,5 +1,6 @@
 package uz.wh.db.dao;
 
+import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.OutgoDAO;
 import uz.wh.db.entities.documentation.Order;
@@ -9,6 +10,7 @@ import uz.wh.db.repositories.OutgoRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Service
 public class OutputDAOImpl implements OutgoDAO {
 
     OutgoRepository repository;
@@ -34,7 +36,7 @@ public class OutputDAOImpl implements OutgoDAO {
 
     @Override
     public Outgo getByOrderedDate(LocalDateTime date) {
-        return repository.findByDate(date);
+        return repository.findByOrderDate(date);
     }
 
     @Override
