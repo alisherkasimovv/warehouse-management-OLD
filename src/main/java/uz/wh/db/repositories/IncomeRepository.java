@@ -16,7 +16,9 @@ public interface IncomeRepository extends JpaRepository<Income,Integer> {
 
     Income findByVendorId(int i);
 
-    Income findByDate(LocalDateTime date);
+    Income findByOrderDate(LocalDateTime date);
+
+
 
 
 

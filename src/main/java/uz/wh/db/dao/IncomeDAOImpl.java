@@ -25,7 +25,7 @@ public class IncomeDAOImpl implements IncomeDAO {
 
     @Override
     public Income getByDate(LocalDateTime date) {
-        return repository.findByDate(date);
+        return repository.findByOrderDate(date);
     }
 
     @Override

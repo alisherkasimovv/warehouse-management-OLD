@@ -31,8 +31,9 @@ public class VendorController {
     }
 
     @GetMapping(value = "/delete")
-    public ResponseEntity<List<Vendor>> deleteById(@PathVariable int id){
-        vendorDAO.deleteVendorById(id);
-        return new ResponseEntity<>(vendorDAO.getAll(),HttpStatus.OK);
+    public ResponseEntity<ObjectAndMessage>  deleteById(@PathVariable int id){
+
+        ObjectAndMessage objectAndMessage=vendorDAO.deleteVendorById(id);
+        return new ResponseEntity<>(objectAndMessage,HttpStatus.OK);
     }
 }

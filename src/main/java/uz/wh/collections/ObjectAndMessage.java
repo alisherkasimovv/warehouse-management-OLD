@@ -10,6 +10,9 @@ import uz.wh.db.entities.Vendor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ObjectAndMessage {
+
     private Object object;
+
     private  String message;
+
 }

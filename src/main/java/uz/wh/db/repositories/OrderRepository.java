@@ -15,5 +15,5 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
 
     Order findByCustomerId(int id);
 
-    Order findByDate(LocalDateTime date);
+    Order findByOrderDate(LocalDateTime date);
 }

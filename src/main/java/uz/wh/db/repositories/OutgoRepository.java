@@ -16,7 +16,7 @@ public interface OutgoRepository extends JpaRepository<Outgo,Integer> {
 
     Outgo findByCustomerName(String name);
 
-    Outgo findByDate(LocalDateTime date);
+    Outgo findByOrderDate(LocalDateTime date);
 
     Outgo findByCustomerId(int id);
 }

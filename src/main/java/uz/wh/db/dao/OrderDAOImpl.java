@@ -1,5 +1,6 @@
 package uz.wh.db.dao;
 
+import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.OrderDAO;
 import uz.wh.db.entities.documentation.Income;
@@ -8,7 +9,7 @@ import uz.wh.db.repositories.OrderRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
+@Service
 public class OrderDAOImpl implements OrderDAO {
 
     OrderRepository repository;
