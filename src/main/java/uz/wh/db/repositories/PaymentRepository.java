@@ -14,6 +14,8 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer> {
     List<Payment> findAllByPaymentType(PaymentType paymentType);
     List<Payment> findAllByPayerId(int payerId);
 
+    Payment findById(int id);
+
     @Query("SELECT sum(p.amount) FROM Payment p WHERE p.payerId = :payerId")
     double sumUpAllPaymentsByPayer(int payerId);
 
