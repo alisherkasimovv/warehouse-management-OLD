@@ -3,51 +3,44 @@ package uz.wh.db.dao;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.ItemDAO;
-import uz.wh.db.dao.interfaces.OutgoDAO;
-import uz.wh.db.dto.OutgoWithItemsDTO;
+import uz.wh.db.dao.interfaces.ReturnProductDAO;
+import uz.wh.db.dto.ReturnWithItemsDTO;
 import uz.wh.db.entities.documentation.Outgo;
-import uz.wh.db.repositories.OutgoRepository;
+import uz.wh.db.entities.documentation.ReturnProduct;
+import uz.wh.db.repositories.ReturnProductRepository;
 
-import java.time.LocalDateTime;
 import java.util.List;
-
 @Service
-public class OutgoDAOImpl implements OutgoDAO {
-
-    private OutgoRepository repository;
-    private ItemDAO itemDAO;
-
-    public OutgoDAOImpl(OutgoRepository repository,ItemDAO itemDAO) {
-        this.repository=repository;
+public class ReturnProductDAOImpl implements ReturnProductDAO {
+   ReturnProductRepository repository;
+   ItemDAO itemDAO;
+    public ReturnProductDAOImpl( ReturnProductRepository repository1,ItemDAO itemDAO) {
+        repository=repository1;
         this.itemDAO=itemDAO;
     }
 
     @Override
-    public List<Outgo> getAll() {
+    public List<ReturnProduct> getAll() {
         return repository.findAll();
     }
 
     @Override
-    public Outgo getByDocumentNo(String documnetNo) {
+    public ReturnProduct getByDocumentNo(String documnetNo) {
         return repository.findByDocumentNo(documnetNo);
     }
 
     @Override
-    public Outgo getByCustomerId(int id) {
+    public ReturnProduct getByCustomerId(int id) {
         return repository.findByCustomerId(id);
     }
 
     @Override
-    public Outgo getByOrderedDate(LocalDateTime date) {
-        return repository.findByOrderDate(date);
-    }
+    public ObjectAndMessage save(ReturnWithItemsDTO returnProduct) {
 
-    @Override
-    public ObjectAndMessage save(OutgoWithItemsDTO outgo) {
-        Outgo saved;
+        ReturnProduct  saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        Outgo temp = outgo.getOutgo();
-        itemDAO.saveItemList(outgo.getItems(), outgo.getOutgo().getDocumentNo());
+       ReturnProduct temp =returnProduct.getReturnProduct();
+        itemDAO.saveItemList(returnProduct.getItems(), returnProduct.getReturnProduct().getDocumentNo());
 
 //        if (temp != null) {
 //            temp.setDeleted(false);
@@ -58,8 +51,8 @@ public class OutgoDAOImpl implements OutgoDAO {
 //            saved = repository.save(temp);
 //            objectAndMessage.setMessage("Outgo has been updated!");
 //        } else {
-            saved =repository.save(temp);
-            objectAndMessage.setMessage("Newe Outgo has been created!");
+        saved =repository.save(temp);
+        objectAndMessage.setMessage("The product has been returned!");
 //        }
         objectAndMessage.setObject(saved);
         return objectAndMessage;
@@ -67,9 +60,8 @@ public class OutgoDAOImpl implements OutgoDAO {
 
     @Override
     public ObjectAndMessage deleteById(int id) {
-        Outgo outgo=repository.findById(id);
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        objectAndMessage.setMessage("Outgo has been deleted!");
+        objectAndMessage.setMessage("The returned products has been removed to the list.");
         objectAndMessage.setObject(null);
         repository.deleteById(id);
 

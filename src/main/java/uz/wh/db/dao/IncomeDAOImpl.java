@@ -3,6 +3,8 @@ package uz.wh.db.dao;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.IncomeDAO;
+import uz.wh.db.dao.interfaces.ItemDAO;
+import uz.wh.db.dto.IncomeWithItemsDTO;
 import uz.wh.db.entities.documentation.Income;
 import uz.wh.db.repositories.IncomeRepository;
 
@@ -13,9 +15,10 @@ import java.util.List;
 public class IncomeDAOImpl implements IncomeDAO {
 
     IncomeRepository repository;
-
-    public IncomeDAOImpl(IncomeRepository incomeRepository) {
+    ItemDAO itemDAO;
+    public IncomeDAOImpl(IncomeRepository incomeRepository,ItemDAO itemDAO1) {
         repository = incomeRepository;
+        itemDAO=itemDAO1;
     }
 
     @Override
@@ -39,32 +42,35 @@ public class IncomeDAOImpl implements IncomeDAO {
     }
 
     @Override
-    public ObjectAndMessage save(Income income) {
+    public ObjectAndMessage save(IncomeWithItemsDTO incomeWithItems) {
         Income saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        Income temp = repository.findById(income.getId());
+        itemDAO.saveItemList(incomeWithItems.getItems(),incomeWithItems.getIncome().getDocumentNo());
+        Income temp = incomeWithItems.getIncome();
 
-        if (temp != null) {
-            temp.setDeleted(false);
-            temp.setBalance(income.getBalance());
-            temp.setCost(income.getCost());
-            temp.setDocumentNo(income.getDocumentNo());
-            saved = repository.save(temp);
-            objectAndMessage.setMessage("Income has been updated!");
-        } else {
-            saved =repository.save(income);
+//        if (temp != null) {
+//            temp.setDeleted(false);
+//            temp.setBalance(income.getBalance());
+//            temp.setCost(income.getCost());
+//            temp.setDocumentNo(income.getDocumentNo());
+//            saved = repository.save(temp);
+//            objectAndMessage.setMessage("Income has been updated!");
+//        } else {
+            saved =repository.save(temp);
             objectAndMessage.setMessage("Income has been created!");
-        }
+//        }
         objectAndMessage.setObject(saved);
         return objectAndMessage;
     }
 
     @Override
     public ObjectAndMessage deleteById(int id) {
+        Income income=repository.findById(id);
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         objectAndMessage.setMessage("Income has been deleted!");
+        income.setDeleted(true);
         objectAndMessage.setObject(null);
-        repository.deleteById(id);
+
         return objectAndMessage;
     }
 

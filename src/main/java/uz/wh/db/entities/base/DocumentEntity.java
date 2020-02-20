@@ -11,9 +11,6 @@ import java.time.LocalDateTime;
 @Setter
 public abstract class DocumentEntity extends BaseEntity {
 
-    @Column(name = "reference_number", unique = true)
-    private String reference;
-
     @Column(name = "order_date")
     private LocalDateTime orderDate;
 

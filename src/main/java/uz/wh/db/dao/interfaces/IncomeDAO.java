@@ -1,6 +1,7 @@
 package uz.wh.db.dao.interfaces;
 
 import uz.wh.collections.ObjectAndMessage;
+import uz.wh.db.dto.IncomeWithItemsDTO;
 import uz.wh.db.entities.documentation.Income;
 
 import java.time.LocalDateTime;
@@ -16,7 +17,7 @@ public interface IncomeDAO {
 
     Income getByDate(LocalDateTime date);
 
-    ObjectAndMessage save(Income income);
+    ObjectAndMessage save(IncomeWithItemsDTO incomeWithItemsDTO);
 
     ObjectAndMessage deleteById(int id);
 }

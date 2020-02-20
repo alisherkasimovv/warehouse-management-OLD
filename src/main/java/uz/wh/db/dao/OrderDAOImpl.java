@@ -62,10 +62,12 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public ObjectAndMessage deleteById(int id) {
+        Order order=repository.findById(id);
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         objectAndMessage.setMessage("Order has been deleted!");
+        order.setDeleted(true);
         objectAndMessage.setObject(null);
-        repository.deleteById(id);
+        repository.save(order);
         return objectAndMessage;
     }
 }

@@ -1,6 +1,7 @@
 package uz.wh.db.dao.interfaces;
 
 import uz.wh.collections.ObjectAndMessage;
+import uz.wh.db.dto.OutgoWithItemsDTO;
 import uz.wh.db.entities.documentation.Order;
 import uz.wh.db.entities.documentation.Outgo;
 
@@ -16,7 +17,7 @@ public interface OutgoDAO {
 
     Outgo getByOrderedDate(LocalDateTime date);
 
-    ObjectAndMessage save(Outgo outgo);
+    ObjectAndMessage save(OutgoWithItemsDTO outgo);
 
     ObjectAndMessage deleteById(int id);
 

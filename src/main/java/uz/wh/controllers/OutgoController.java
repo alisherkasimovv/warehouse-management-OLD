@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.IncomeDAO;
 import uz.wh.db.dao.interfaces.OutgoDAO;
+import uz.wh.db.dto.OutgoWithItemsDTO;
 import uz.wh.db.entities.documentation.Income;
 import uz.wh.db.entities.documentation.Outgo;
 
@@ -31,17 +32,17 @@ public class OutgoController {
     }
 
     @RequestMapping(value = "/get/{customerid}", method = RequestMethod.GET)
-    public ResponseEntity<Outgo> getByCutomerName(@PathVariable int id) {
-        return new ResponseEntity<>(outgoDAO.getByCustomerId(id), HttpStatus.OK);
+    public ResponseEntity<Outgo> getByCutomerName(@PathVariable int customerid) {
+        return new ResponseEntity<>(outgoDAO.getByCustomerId(customerid), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<ObjectAndMessage> saveIncome(@Valid @RequestBody Outgo outgo) {
+    public ResponseEntity<ObjectAndMessage> saveIncome(@Valid @RequestBody OutgoWithItemsDTO outgo) {
         ObjectAndMessage objectAndMessage = outgoDAO.save(outgo);
         return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
     }
-    @PostMapping(value = "/deleted")
-    public ResponseEntity<ObjectAndMessage> deleteIncome(@Valid @RequestBody int id) {
+    @PostMapping(value = "/deleted/{id}")
+    public ResponseEntity<ObjectAndMessage> deleteIncome(@PathVariable int id) {
         ObjectAndMessage objectAndMessage = outgoDAO.deleteById(id);
         return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
     }

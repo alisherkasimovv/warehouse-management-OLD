@@ -30,8 +30,8 @@ public class OrderController {
     }
 
     @RequestMapping(value = "/get/{customerid}", method = RequestMethod.GET)
-    public ResponseEntity<Order> getByCustomerName(@PathVariable int id) {
-        return new ResponseEntity<>(orderDAO.getByCustomerId(id), HttpStatus.OK);
+    public ResponseEntity<Order> getByCustomerName(@PathVariable int customerid) {
+        return new ResponseEntity<>(orderDAO.getByCustomerId(customerid), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save")
@@ -39,8 +39,8 @@ public class OrderController {
         ObjectAndMessage objectAndMessage = orderDAO.save(order);
         return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
     }
-    @PostMapping(value = "/deleted")
-    public ResponseEntity<ObjectAndMessage> deleteOrder(@Valid @RequestBody int id) {
+    @GetMapping(value = "/deleted/{id}")
+    public ResponseEntity<ObjectAndMessage> deleteOrder(@PathVariable int id) {
         ObjectAndMessage objectAndMessage = orderDAO.deleteById(id);
         return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
     }

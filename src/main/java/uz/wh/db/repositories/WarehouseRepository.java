@@ -1,7 +1,6 @@
 package uz.wh.db.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sun.management.jdp.JdpPacket;
 import uz.wh.db.entities.Warehouse;
 
 import java.util.List;
