@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 @RestController
 @RequestMapping("/orders")
+@CrossOrigin
 public class OrderController {
     private OrderDAO orderDAO;
     public OrderController(OrderDAO order) {

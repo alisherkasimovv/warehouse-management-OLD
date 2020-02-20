@@ -52,7 +52,7 @@ public class IncomeDAOImpl implements IncomeDAO {
             saved = repository.save(temp);
             objectAndMessage.setMessage("Income has been updated!");
         } else {
-            saved =repository.save(income);
+            saved = repository.save(income);
             objectAndMessage.setMessage("Income has been created!");
         }
         objectAndMessage.setObject(saved);

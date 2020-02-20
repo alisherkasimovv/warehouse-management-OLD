@@ -11,7 +11,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/products")
+@CrossOrigin
 public class ProductController  {
 
     private ProductDAO productDAO;

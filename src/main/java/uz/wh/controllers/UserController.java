@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/users")
+@CrossOrigin
 public class UserController {
     UserDAO userDAO;
 
@@ -18,37 +19,37 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/get")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userDAO.getAllByDeletedFalse(), HttpStatus.OK);
     }
 
-    @GetMapping("/getAllTrue")
+    @GetMapping("/get/deleted")
     public ResponseEntity<List<User>> getAllTrueUsers() {
         return new ResponseEntity<>(userDAO.getAllByDeletedTrue(), HttpStatus.OK);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/get/id={id}")
     public ResponseEntity<User> getUserById(@PathVariable int id) {
         return new ResponseEntity<>(userDAO.getById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/getName")
+    @GetMapping("/get/first={firstName}")
     public ResponseEntity<User> getUserByFirstName(@PathVariable String firstName) {
         return new ResponseEntity<>(userDAO.getByFirstName(firstName), HttpStatus.OK);
     }
 
-    @GetMapping("/getLastName")
+    @GetMapping("/get/last={lastName}")
     public ResponseEntity<User> getUserByLastName(@PathVariable String lastName) {
         return new ResponseEntity<>(userDAO.getByLastName(lastName), HttpStatus.OK);
     }
 
-    @GetMapping("/getUsername")
+    @GetMapping("/get/username={username}")
     public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
         return new ResponseEntity<>(userDAO.getByUsername(username), HttpStatus.OK);
     }
 
-    @GetMapping("/getAddress")
+    @GetMapping("/get/address={address}")
     public ResponseEntity<User> getUserByAddress(@PathVariable String address) {
         return new ResponseEntity<>(userDAO.getByAddress(address), HttpStatus.OK);
     }

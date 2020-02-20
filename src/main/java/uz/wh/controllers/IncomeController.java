@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/incomes")
+@CrossOrigin
 public class IncomeController {
     private IncomeDAO incomeDAO ;
     public IncomeController(IncomeDAO incomeDAO) {
