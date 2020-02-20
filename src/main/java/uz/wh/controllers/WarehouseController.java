@@ -2,10 +2,7 @@ package uz.wh.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.WarehouseStatus;
 import uz.wh.db.dao.interfaces.WarehouseDAO;
 import uz.wh.db.entities.Warehouse;
@@ -14,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/warehouse")
+@CrossOrigin
 public class WarehouseController {
 
     private WarehouseDAO warehouseDAO;
@@ -23,33 +21,33 @@ public class WarehouseController {
     }
 
     @GetMapping(value = "/get")
-    private ResponseEntity<List<Warehouse>> getAll() {
+    public ResponseEntity<List<Warehouse>> getAll() {
         return new ResponseEntity<>(warehouseDAO.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/{id}")
-    private ResponseEntity<Warehouse> getById(@PathVariable int id) {
+    public ResponseEntity<Warehouse> getById(@PathVariable int id) {
         return new ResponseEntity<>(warehouseDAO.getById(id), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/get/count/warehouse={id}")
-    private ResponseEntity<List<WarehouseStatus>> getCountWarehouseId(int id){
-        return new ResponseEntity<>(warehouseDAO.countProductsOnOneWarehouse(id),HttpStatus.OK);
+    @GetMapping(value = "/get/count/warehouse={warehouseId}")
+    public ResponseEntity<List<WarehouseStatus>> getCountWarehouseId(@PathVariable int warehouseId){
+        return new ResponseEntity<>(warehouseDAO.countProductsOnOneWarehouse(warehouseId),HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/count/product={id}")
-    private ResponseEntity<WarehouseStatus> getCountProductId(int id){
+    public ResponseEntity<WarehouseStatus> getCountProductId(@PathVariable int id){
         return new ResponseEntity<>(warehouseDAO.countOneProductOnAllWarehouses(id),HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/count/full")
-    private ResponseEntity<List<WarehouseStatus>> getCountFull(){
+    public ResponseEntity<List<WarehouseStatus>> getCountFull(){
         return new ResponseEntity<>(warehouseDAO.countProductsOnAllWarehouses(),HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/count/warehouse={wId}&product={pId}")
-    private ResponseEntity<WarehouseStatus> getCountOneWarehouseAndOneProduct(int wid,int pid){
-        return new ResponseEntity<>(warehouseDAO.countOneProductOnOneWarehouse(pid,wid),HttpStatus.OK);
+    public ResponseEntity<WarehouseStatus> getCountOneWarehouseAndOneProduct(@PathVariable int wId, @PathVariable int pId){
+        return new ResponseEntity<>(warehouseDAO.countOneProductOnOneWarehouse(pId, wId),HttpStatus.OK);
     }
 
 }

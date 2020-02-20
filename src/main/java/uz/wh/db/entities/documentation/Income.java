@@ -31,8 +31,5 @@ public class Income extends DocumentEntity {
     @Column
     private double balance;
 
-
-
-
 }
 

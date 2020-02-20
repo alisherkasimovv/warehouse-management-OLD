@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vendors")
+@CrossOrigin
 public class VendorController {
     private VendorDAO vendorDAO;
 

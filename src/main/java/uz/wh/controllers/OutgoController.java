@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ougoes")
+@CrossOrigin
 public class OutgoController {
     private OutgoDAO outgoDAO;
     public OutgoController(OutgoDAO outgoDAO) {
