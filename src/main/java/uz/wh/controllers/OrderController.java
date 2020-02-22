@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.IncomeDAO;
 import uz.wh.db.dao.interfaces.OrderDAO;
+import uz.wh.db.dto.OrderWithItemsDTO;
 import uz.wh.db.entities.documentation.Income;
 import uz.wh.db.entities.documentation.Order;
 
@@ -36,7 +37,7 @@ public class OrderController {
     }
 
     @PostMapping(value = "/save")
-    public ResponseEntity<ObjectAndMessage> saveOrder(@Valid @RequestBody Order order) {
+    public ResponseEntity<ObjectAndMessage> saveOrder(@Valid @RequestBody OrderWithItemsDTO order) {
         ObjectAndMessage objectAndMessage = orderDAO.save(order);
         return new ResponseEntity<>(objectAndMessage, HttpStatus.OK);
     }

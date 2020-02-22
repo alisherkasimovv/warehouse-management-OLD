@@ -1,6 +1,7 @@
 package uz.wh.db.dao.interfaces;
 
 import uz.wh.collections.ObjectAndMessage;
+import uz.wh.db.dto.OrderWithItemsDTO;
 import uz.wh.db.entities.documentation.Income;
 import uz.wh.db.entities.documentation.Order;
 
@@ -17,7 +18,7 @@ public interface OrderDAO {
 
     Order getByOrderedDate(LocalDateTime date);
 
-    ObjectAndMessage save(Order order);
+    ObjectAndMessage save(OrderWithItemsDTO order);
 
     ObjectAndMessage deleteById(int id);
 }

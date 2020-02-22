@@ -47,7 +47,12 @@ public class OutgoDAOImpl implements OutgoDAO {
         Outgo saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         Outgo temp = outgo.getOutgo();
-        itemDAO.saveItemList(outgo.getItems(), outgo.getOutgo().getDocumentNo());
+        itemDAO.saveItemList(
+                outgo.getItems(),
+                outgo.getOutgo().getDocumentNo(),
+                outgo.getOutgo().getDocumentType(),
+                outgo.getWarehouseId()
+        );
 
 //        if (temp != null) {
 //            temp.setDeleted(false);

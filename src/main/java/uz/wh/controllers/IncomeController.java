@@ -17,12 +17,10 @@ import java.util.List;
 @RequestMapping("/incomes")
 @CrossOrigin
 public class IncomeController {
-    private int reference;
     private IncomeDAO incomeDAO;
 
     public IncomeController(IncomeDAO incomeDAO) {
         this.incomeDAO=incomeDAO;
-        this.reference = 0;
     }
 
     @GetMapping(value = "/get")
@@ -30,14 +28,14 @@ public class IncomeController {
         return new ResponseEntity<>(incomeDAO.getAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/get/{documentNo}", method = RequestMethod.GET)
+    @RequestMapping(value = "/get/document={documentNo}", method = RequestMethod.GET)
     public ResponseEntity<Income> getDocumentNo(@PathVariable String documentNo) {
         return new ResponseEntity<>(incomeDAO.getByDocumentNo(documentNo), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/get/{vendorid}", method = RequestMethod.GET)
-    public ResponseEntity<Income> getByVendorName(@PathVariable int vendorid) {
-        return new ResponseEntity<>(incomeDAO.getByVendorId(vendorid), HttpStatus.OK);
+    @RequestMapping(value = "/get/id={vendorId}", method = RequestMethod.GET)
+    public ResponseEntity<Income> getByVendorName(@PathVariable int vendorId) {
+        return new ResponseEntity<>(incomeDAO.getByVendorId(vendorId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save")

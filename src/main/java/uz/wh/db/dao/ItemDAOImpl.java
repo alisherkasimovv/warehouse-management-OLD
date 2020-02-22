@@ -2,7 +2,9 @@ package uz.wh.db.dao;
 
 import org.springframework.stereotype.Service;
 import uz.wh.db.dao.interfaces.ItemDAO;
+import uz.wh.db.dao.interfaces.WarehouseItemDAO;
 import uz.wh.db.entities.documentation.Item;
+import uz.wh.db.enums.DocumentType;
 import uz.wh.db.repositories.ItemRepository;
 
 import java.util.List;
@@ -11,9 +13,11 @@ import java.util.List;
 public class ItemDAOImpl implements ItemDAO {
 
     private ItemRepository repository;
+    private WarehouseItemDAO warehouseItemDAO;
 
-    public ItemDAOImpl(ItemRepository repository) {
+    public ItemDAOImpl(ItemRepository repository, WarehouseItemDAO warehouseItemDAO) {
         this.repository = repository;
+        this.warehouseItemDAO = warehouseItemDAO;
     }
 
     @Override
@@ -32,9 +36,22 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public void saveItemList(List<Item> items, String documentId) {
+    public void saveItemList(List<Item> items, String documentId, DocumentType type, int warehouseId) {
         for (Item item : items) {
             item.setDocumentId(documentId);
+
+            switch (type) {
+                case INCOME:
+                case RETURN:
+                    warehouseItemDAO.registerIncomeToWarehouse(item, warehouseId);
+                    break;
+                case OUTGO:
+                    warehouseItemDAO.registerOutgoFromWarehouse(item, warehouseId);
+                    break;
+                case ORDER:
+                    break;
+            }
+
         }
         repository.saveAll(items);
 

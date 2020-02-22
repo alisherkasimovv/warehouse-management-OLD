@@ -13,9 +13,10 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class ReturnWithItemsDTO {
 
     private ReturnProduct returnProduct;
     private List<Item> items;
+    private int warehouseId;
+
 }

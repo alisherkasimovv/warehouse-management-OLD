@@ -45,7 +45,12 @@ public class IncomeDAOImpl implements IncomeDAO {
     public ObjectAndMessage save(IncomeWithItemsDTO incomeWithItems) {
         Income saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        itemDAO.saveItemList(incomeWithItems.getItems(),incomeWithItems.getIncome().getDocumentNo());
+        itemDAO.saveItemList(
+                incomeWithItems.getItems(),
+                incomeWithItems.getIncome().getDocumentNo(),
+                incomeWithItems.getIncome().getDocumentType(),
+                incomeWithItems.getWarehouseId());
+
         Income temp = incomeWithItems.getIncome();
 
 //        if (temp != null) {

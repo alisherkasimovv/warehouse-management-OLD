@@ -1,9 +1,7 @@
 package uz.wh.db.dao;
 
 import org.springframework.stereotype.Service;
-import uz.wh.collections.WarehouseStatus;
 import uz.wh.db.dao.interfaces.WarehouseItemDAO;
-import uz.wh.db.entities.Warehouse;
 import uz.wh.db.entities.WarehouseItem;
 import uz.wh.db.entities.documentation.Item;
 import uz.wh.db.repositories.WarehouseItemRepository;
@@ -25,13 +23,8 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
     }
 
     @Override
-    public List<WarehouseItem> getItemsForWarehouse(int warehouseId) {
-        return repository.findAllByWarehouseIdAndDeletedFalse(warehouseId);
-    }
-
-    @Override
     public List<WarehouseItem> getAllItemsForWarehouse(int warehouseId) {
-        return null;
+        return repository.findAllByWarehouseIdAndDeletedFalse(warehouseId);
     }
 
     @Override
@@ -41,7 +34,8 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
 
     @Override
     public void registerIncomeToWarehouse(Item item, int warehouseId) {
-        WarehouseItem wItem = repository.findByWarehouseIdAndProductIdAndDeletedFalse(warehouseId, item.getId());
+        WarehouseItem wItem =
+                repository.findByWarehouseIdAndProductIdAndDeletedFalse(warehouseId, item.getId());
 
         if (wItem != null) {
             wItem.setQuantity(wItem.getQuantity() + item.getQuantity());
@@ -55,11 +49,21 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
         }
         repository.save(wItem);
 
-
     }
 
     @Override
     public void registerOutgoFromWarehouse(Item item, int warehouseId) {
-        WarehouseItem warehouseItem = repository.findByWarehouseIdAndProductIdAndDeletedFalse(warehouseId, item.getProductId());
+        WarehouseItem wItem =
+                repository.findByWarehouseIdAndProductIdAndDeletedFalse(warehouseId, item.getProductId());
+
+        if (wItem != null) {
+            if (wItem.getQuantity() < item.getQuantity()) return;
+
+            wItem.setQuantity(wItem.getQuantity() - item.getQuantity());
+        } else {
+            return;
+        }
+        repository.save(wItem);
+
     }
 }

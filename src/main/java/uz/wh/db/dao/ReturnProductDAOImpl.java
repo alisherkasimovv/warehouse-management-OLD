@@ -5,18 +5,19 @@ import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.ItemDAO;
 import uz.wh.db.dao.interfaces.ReturnProductDAO;
 import uz.wh.db.dto.ReturnWithItemsDTO;
-import uz.wh.db.entities.documentation.Outgo;
 import uz.wh.db.entities.documentation.ReturnProduct;
 import uz.wh.db.repositories.ReturnProductRepository;
 
 import java.util.List;
+
 @Service
 public class ReturnProductDAOImpl implements ReturnProductDAO {
-   ReturnProductRepository repository;
-   ItemDAO itemDAO;
-    public ReturnProductDAOImpl( ReturnProductRepository repository1,ItemDAO itemDAO) {
-        repository=repository1;
-        this.itemDAO=itemDAO;
+    private ReturnProductRepository repository;
+    private ItemDAO itemDAO;
+
+    public ReturnProductDAOImpl(ReturnProductRepository repository1, ItemDAO itemDAO) {
+        repository = repository1;
+        this.itemDAO = itemDAO;
     }
 
     @Override
@@ -37,10 +38,15 @@ public class ReturnProductDAOImpl implements ReturnProductDAO {
     @Override
     public ObjectAndMessage save(ReturnWithItemsDTO returnProduct) {
 
-        ReturnProduct  saved;
+        ReturnProduct saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-       ReturnProduct temp =returnProduct.getReturnProduct();
-        itemDAO.saveItemList(returnProduct.getItems(), returnProduct.getReturnProduct().getDocumentNo());
+        ReturnProduct temp = returnProduct.getReturnProduct();
+        itemDAO.saveItemList(
+                returnProduct.getItems(),
+                returnProduct.getReturnProduct().getDocumentNo(),
+                returnProduct.getReturnProduct().getDocumentType(),
+                returnProduct.getWarehouseId()
+        );
 
 //        if (temp != null) {
 //            temp.setDeleted(false);
@@ -51,7 +57,7 @@ public class ReturnProductDAOImpl implements ReturnProductDAO {
 //            saved = repository.save(temp);
 //            objectAndMessage.setMessage("Outgo has been updated!");
 //        } else {
-        saved =repository.save(temp);
+        saved = repository.save(temp);
         objectAndMessage.setMessage("The product has been returned!");
 //        }
         objectAndMessage.setObject(saved);

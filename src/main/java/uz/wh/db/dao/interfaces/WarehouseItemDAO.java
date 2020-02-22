@@ -8,7 +8,6 @@ import java.util.List;
 public interface WarehouseItemDAO {
 
     List<WarehouseItem> getAllDeletedItems();
-    List<WarehouseItem> getItemsForWarehouse(int warehouseId);
     List<WarehouseItem> getAllItemsForWarehouse(int warehouseId);
     WarehouseItem getItemForWarehouse(int warehouseId, int productId);
     void registerIncomeToWarehouse(Item item, int warehouseId);

@@ -17,4 +17,5 @@ import java.util.List;
 public class IncomeWithItemsDTO {
     private Income income;
     private List<Item> items;
+    private int warehouseId;
 }

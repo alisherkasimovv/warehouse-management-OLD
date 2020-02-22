@@ -2,8 +2,9 @@ package uz.wh.db.dao;
 
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
+import uz.wh.db.dao.interfaces.ItemDAO;
 import uz.wh.db.dao.interfaces.OrderDAO;
-import uz.wh.db.entities.documentation.Income;
+import uz.wh.db.dto.OrderWithItemsDTO;
 import uz.wh.db.entities.documentation.Order;
 import uz.wh.db.repositories.OrderRepository;
 
@@ -12,10 +13,12 @@ import java.util.List;
 @Service
 public class OrderDAOImpl implements OrderDAO {
 
-    OrderRepository repository;
+    private OrderRepository repository;
+    private ItemDAO itemDAO;
 
-    public OrderDAOImpl(OrderRepository repository) {
+    public OrderDAOImpl(OrderRepository repository, ItemDAO itemDAO) {
         this.repository=repository;
+        this.itemDAO = itemDAO;
     }
 
     @Override
@@ -35,26 +38,33 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public Order getByOrderedDate(LocalDateTime date) {
-        return getByOrderedDate(date);
+        return repository.findByOrderDate(date);
     }
 
     @Override
-    public ObjectAndMessage save(Order order) {
+    public ObjectAndMessage save(OrderWithItemsDTO order) {
         Order saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        Order temp = repository.findById(order.getId());
+        itemDAO.saveItemList(
+                order.getItems(),
+                order.getOrder().getDocumentNo(),
+                order.getOrder().getDocumentType(),
+                order.getWarehouseId()
+        );
+
+        Order temp = repository.findById(order.getOrder().getId());
 
         if (temp != null) {
             temp.setDeleted(false);
-            temp.setBalance(order.getBalance());
-            temp.setDocumentNo(order.getDocumentNo());
-            temp.setCustomerId(order.getCustomerId());
+            temp.setBalance(order.getOrder().getBalance());
+            temp.setDocumentNo(order.getOrder().getDocumentNo());
+            temp.setCustomerId(order.getOrder().getCustomerId());
 
             saved = repository.save(temp);
             objectAndMessage.setMessage("Order has been updated!");
         } else {
-            saved =repository.save(order);
-            objectAndMessage.setMessage("Newe Order has been created!");
+            saved =repository.save(order.getOrder());
+            objectAndMessage.setMessage("New Order has been created!");
         }
         objectAndMessage.setObject(saved);
         return objectAndMessage;
