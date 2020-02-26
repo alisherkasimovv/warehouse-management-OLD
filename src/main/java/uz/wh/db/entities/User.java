@@ -4,15 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.lang.Nullable;
 import uz.wh.db.entities.base.BaseEntity;
+import uz.wh.db.enums.UserTypes;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import java.util.Collection;
-import java.util.List;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
+//import org.springframework.security.core.GrantedAuthority;
+//import org.springframework.security.core.userdetails.UserDetails;
 
 @Getter
 @Setter
@@ -27,17 +29,23 @@ public class User extends BaseEntity {
     @Column(name = "db_password", nullable = false)
     private String password;
 
-    @Column(name = "db_firstname", nullable = false)
+    @Column(name = "db_firstname")
     private String firstName;
 
     @Column(name = "db_lastname")
     private String lastName;
 
-    @Column(name = "db_phonenumber", unique = true, length = 13)
+    @Column(name = "db_phonenumber")
     private String phone;
 
-    @Column(name = "db_address", nullable = false)
+    @Column(name = "db_address")
     private String address;
+
+    @Nullable
+    @Column(name = "user_type")
+    @Enumerated(EnumType.STRING)
+    private UserTypes userTypes;
+
 }
 //    @ManyToMany
 //    private List<Role> roles;

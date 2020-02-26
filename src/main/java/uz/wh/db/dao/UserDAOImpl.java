@@ -3,9 +3,7 @@ package uz.wh.db.dao;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.UserAndMessage;
 import uz.wh.db.dao.interfaces.UserDAO;
-import uz.wh.db.entities.Role;
 import uz.wh.db.entities.User;
-import uz.wh.db.enums.UserTypes;
 import uz.wh.db.repositories.UserRepository;
 
 import java.util.List;
@@ -73,6 +71,7 @@ public class UserDAOImpl implements UserDAO {
             temp.setLastName(user.getLastName());
             temp.setAddress(user.getAddress());
             temp.setPhone(user.getPhone());
+            temp.setUserTypes(user.getUserTypes());
             saved = repository.save(temp);
             message.setMessage("User successfully saved!");
 

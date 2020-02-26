@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
 import uz.wh.db.entities.base.DocumentEntity;
-import uz.wh.db.enums.DocumentType;
 
 import javax.persistence.*;
 
@@ -37,10 +36,4 @@ public class Item extends DocumentEntity {
     @Nullable
     @Column(name = "quantity")
     private double quantity;
-
-    @Nullable
-    @Column(name = "document_type")
-    @Enumerated(EnumType.STRING)
-    private DocumentType documentItem;
-
 }

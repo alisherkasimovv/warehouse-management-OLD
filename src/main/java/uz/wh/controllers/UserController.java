@@ -7,6 +7,7 @@ import uz.wh.collections.UserAndMessage;
 import uz.wh.db.dao.interfaces.UserDAO;
 import uz.wh.db.entities.User;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -60,7 +61,9 @@ public class UserController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<UserAndMessage> saveAndEditUser(@RequestBody User user) {
+    public ResponseEntity<UserAndMessage> saveAndEditUser(@Valid @RequestBody User user) {
+        System.out.println(user.toString());
+        System.out.println("We reached method");
         return new ResponseEntity<>(userDAO.saveAndEditUser(user), HttpStatus.OK);
     }
 }
