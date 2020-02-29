@@ -34,7 +34,7 @@ public class WarehouseController {
 
     @PostMapping(value = "/save")
     public ResponseEntity<ObjectAndMessage> saveWarehouse(@Valid @RequestBody Warehouse warehouse) {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(warehouseDAO.saveWarehouse(warehouse), HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/count/warehouse={warehouseId}")
