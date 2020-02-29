@@ -7,13 +7,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Integer> {
+
     List<Order> findAll();
-
+    Order findDistinctFirstByCustomerIdAndDeletedFalseOrderByIdDesc(int customerId);
     Order findById(int id);
-
     Order findByDocumentNo(String documentNo);
-
     Order findByCustomerId(int id);
-
     Order findByOrderDate(LocalDateTime date);
 }

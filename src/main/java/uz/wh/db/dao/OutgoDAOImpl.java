@@ -28,8 +28,13 @@ public class OutgoDAOImpl implements OutgoDAO {
     }
 
     @Override
-    public Outgo getByDocumentNo(String documnetNo) {
-        return repository.findByDocumentNo(documnetNo);
+    public Outgo getLastOutgoForCustomer(int customerId) {
+        return repository.findDistinctFirstByCustomerIdAndDeletedFalseOrderByIdDesc(customerId);
+    }
+
+    @Override
+    public Outgo getByDocumentNo(String documentNo) {
+        return repository.findByDocumentNo(documentNo);
     }
 
     @Override

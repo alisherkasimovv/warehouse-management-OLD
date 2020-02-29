@@ -27,6 +27,11 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
+    public Order getLastOrderForUser(int userId) {
+        return repository.findDistinctFirstByCustomerIdAndDeletedFalseOrderByIdDesc(userId);
+    }
+
+    @Override
     public Order getByDocumentNo(String documnetNo) {
         return repository.findByDocumentNo(documnetNo);
     }

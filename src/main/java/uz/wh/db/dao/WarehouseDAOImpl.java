@@ -1,8 +1,10 @@
 package uz.wh.db.dao;
 
 import org.springframework.stereotype.Service;
+import uz.wh.collections.ObjectAndMessage;
 import uz.wh.collections.WarehouseStatus;
 import uz.wh.db.dao.interfaces.WarehouseDAO;
+import uz.wh.db.dao.interfaces.WarehouseItemDAO;
 import uz.wh.db.entities.Warehouse;
 import uz.wh.db.repositories.WarehouseRepository;
 
@@ -16,27 +18,52 @@ import java.util.List;
 @Service
 public class WarehouseDAOImpl implements WarehouseDAO {
 
-    private WarehouseRepository warehouseRepository;
+    private WarehouseRepository repository;
+    private WarehouseItemDAO itemDAO;
     private EntityManager em;
 
-    public WarehouseDAOImpl(WarehouseRepository warehouseRepository) {
-        this.warehouseRepository = warehouseRepository;
+    public WarehouseDAOImpl(WarehouseRepository repository, WarehouseItemDAO itemDAO) {
+        this.repository = repository;
+        this.itemDAO = itemDAO;
     }
-
-    @PersistenceContext
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
-
 
     @Override
     public Warehouse getById(int id) {
-        return warehouseRepository.findById(id);
+        return repository.findById(id);
     }
 
     @Override
     public List<Warehouse> getAll() {
-        return warehouseRepository.findAll();
+        return repository.findAll();
+    }
+
+    @Override
+    public ObjectAndMessage saveWarehouse(Warehouse warehouse) {
+        Warehouse saved;
+        ObjectAndMessage oam = new ObjectAndMessage();
+        Warehouse temp = repository.findById(warehouse.getId());
+        if (temp != null) {
+            temp = warehouse;
+            saved = repository.save(temp);
+            oam.setMessage(saved.getName() + " nomli ombor yangilandi.");
+        } else {
+            saved = repository.save(warehouse);
+            oam.setMessage("Yangi ombor saqlandi.");
+        }
+
+        oam.setObject(saved);
+        return oam;
+    }
+
+    @Override
+    public String deleteWarehouse(int id) {
+        double count = itemDAO.countAllItemsByWarehouse(id);
+        if (count == 0) {
+            repository.deleteById(id);
+            return "Tanlangan ombor ma'lumotlar bazasidan o'chirildi.";
+        }
+        return "Diqqat! Ombor bo'sh emas! Unda jami " + count + " mahsulot bor." +
+                "Omborni o'chirishdan oldin undagi mahsulotlarni boshqa omborlarga ko'chirish kerak.";
     }
 
     @Override
@@ -44,9 +71,9 @@ public class WarehouseDAOImpl implements WarehouseDAO {
     public List<WarehouseStatus> countProductsOnAllWarehouses() {
         List<WarehouseStatus> warehouseStatusList = new ArrayList<>();
 
-        String QUERY = "SELECT p.id, p.name, w.id, w.name, w.quantity, w.cost, w.price " +
+        String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
-                "INNER JOIN Warehouse w ON w.productId = p.id";
+                "INNER JOIN WarehouseItem w ON w.productId = p.id";
 
         Query query = em.createQuery(QUERY);
 
@@ -82,9 +109,9 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 
         WarehouseStatus warehouseStatus = new WarehouseStatus();
 
-        String QUERY = "SELECT p.id, p.name, w.id, w.name, w.quantity, w.cost, w.price " +
+        String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
-                "INNER JOIN Warehouse w ON w.productId=p.id " + "WHERE p.id=" + productId;
+                "INNER JOIN WarehouseItem w ON w.productId=p.id " + "WHERE p.id=" + productId;
 
         Query query = em.createQuery(QUERY);
 
@@ -118,9 +145,9 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 
         List<WarehouseStatus> warehouseStatusList = new ArrayList<>();
 
-        String QUERY = "SELECT p.id, p.name, w.id, w.name, w.quantity, w.cost, w.price " +
+        String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
-                "INNER JOIN Warehouse w ON w.productId=p.id " + "WHERE w.id=" + warehouseId;
+                "INNER JOIN WarehouseItem w ON w.productId=p.id " + "WHERE w.id=" + warehouseId;
 
         Query query = em.createQuery(QUERY);
 
@@ -155,9 +182,9 @@ public class WarehouseDAOImpl implements WarehouseDAO {
     public WarehouseStatus countOneProductOnOneWarehouse(int productId, int warehouseId) {
         WarehouseStatus warehouseStatus = new WarehouseStatus();
 
-        String QUERY = "SELECT p.id, p.name, w.id, w.name, w.quantity, w.cost, w.price " +
+        String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
-                "INNER JOIN Warehouse w ON w.productId=p.id " + "WHERE p.id=" + productId + ",w.id=" + warehouseId;
+                "INNER JOIN WarehouseItem w ON w.productId=p.id " + "WHERE p.id=" + productId + ",w.id=" + warehouseId;
 
         Query query = em.createQuery(QUERY);
 
@@ -183,6 +210,11 @@ public class WarehouseDAOImpl implements WarehouseDAO {
             }
         }
         return warehouseStatus;
+    }
+
+    @PersistenceContext
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
 }

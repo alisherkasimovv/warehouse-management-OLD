@@ -26,8 +26,13 @@ public class ReturnProductDAOImpl implements ReturnProductDAO {
     }
 
     @Override
-    public ReturnProduct getByDocumentNo(String documnetNo) {
-        return repository.findByDocumentNo(documnetNo);
+    public ReturnProduct getLastReturnByCustomer(int customerId) {
+        return repository.findDistinctFirstByCustomerIdAndDeletedFalseOrderByIdDesc(customerId);
+    }
+
+    @Override
+    public ReturnProduct getByDocumentNo(String documentNo) {
+        return repository.findByDocumentNo(documentNo);
     }
 
     @Override
@@ -67,7 +72,7 @@ public class ReturnProductDAOImpl implements ReturnProductDAO {
     @Override
     public ObjectAndMessage deleteById(int id) {
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        objectAndMessage.setMessage("The returned products has been removed to the list.");
+        objectAndMessage.setMessage("The returned products has been removed from the list.");
         objectAndMessage.setObject(null);
         repository.deleteById(id);
 

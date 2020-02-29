@@ -15,6 +15,7 @@ public interface PaymentRepository extends JpaRepository<Payment, Integer> {
     List<Payment> findAllByPayerId(int payerId);
 
     Payment findById(int id);
+    Payment findDistinctFirstByPayerIdOrderByIdDesc(int payerId);
 
     @Query("SELECT sum(p.amount) FROM Payment p WHERE p.payerId = :payerId")
     double sumUpAllPaymentsByPayer(int payerId);

@@ -3,10 +3,12 @@ package uz.wh.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.wh.collections.ObjectAndMessage;
 import uz.wh.collections.WarehouseStatus;
 import uz.wh.db.dao.interfaces.WarehouseDAO;
 import uz.wh.db.entities.Warehouse;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,6 +30,11 @@ public class WarehouseController {
     @GetMapping(value = "/get/{id}")
     public ResponseEntity<Warehouse> getById(@PathVariable int id) {
         return new ResponseEntity<>(warehouseDAO.getById(id), HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/save")
+    public ResponseEntity<ObjectAndMessage> saveWarehouse(@Valid @RequestBody Warehouse warehouse) {
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/count/warehouse={warehouseId}")

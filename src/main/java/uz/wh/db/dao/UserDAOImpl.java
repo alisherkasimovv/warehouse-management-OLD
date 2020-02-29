@@ -73,12 +73,11 @@ public class UserDAOImpl implements UserDAO {
             temp.setPhone(user.getPhone());
             temp.setUserTypes(user.getUserTypes());
             saved = repository.save(temp);
-            message.setMessage("User successfully saved!");
 
         } else {
             saved = repository.save(user);
-            message.setMessage("User successfully saved!");
         }
+        message.setMessage("User successfully saved!");
         message.setUser(saved);
         return message;
     }

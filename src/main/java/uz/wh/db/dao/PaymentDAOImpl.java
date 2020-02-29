@@ -56,17 +56,27 @@ public class PaymentDAOImpl implements PaymentDAO {
     }
 
     @Override
+    public Payment getLastPaymentForUser(int payerId) {
+        return repository.findDistinctFirstByPayerIdOrderByIdDesc(payerId);
+    }
+
+    @Override
     public ObjectAndMessage acceptPayment(Payment payment) {
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        objectAndMessage.setMessage("New payment has been created!");
+        objectAndMessage.setMessage("New payment has been accepted!");
         objectAndMessage.setObject(repository.save(payment));
         return objectAndMessage;
     }
 
     @Override
+    public double getAllPaymentsForOnePayer(int payerId) {
+        return repository.sumUpAllPaymentsByPayer(payerId);
+    }
+
+    @Override
     public String deletePayment(int paymentId) {
         repository.deleteById(paymentId);
-        return null;
+        return "Payment has been deleted";
     }
 
     @PersistenceContext

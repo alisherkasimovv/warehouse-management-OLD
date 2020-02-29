@@ -1,5 +1,6 @@
 package uz.wh.db.dao;
 
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.IncomeDAO;
@@ -27,13 +28,18 @@ public class IncomeDAOImpl implements IncomeDAO {
     }
 
     @Override
+    public Income getLastIncomeForVendor(int vendorId) {
+        return repository.findDistinctFirstByVendorIdAndDeletedFalseOrderByIdDesc(vendorId);
+    }
+
+    @Override
     public Income getByDate(LocalDateTime date) {
         return repository.findByOrderDate(date);
     }
 
     @Override
-    public Income getByDocumentNo(String documnetNo) {
-        return repository.findByDocumentNo(documnetNo);
+    public Income getByDocumentNo(String documentNo) {
+        return repository.findByDocumentNo(documentNo);
     }
 
     @Override

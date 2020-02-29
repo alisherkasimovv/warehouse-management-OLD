@@ -13,8 +13,10 @@ public interface PaymentDAO {
     List<Payment> getAllPaymentsForPayer(int payerId);
     List<Payment> filterByPaymentType(PaymentType paymentType);
     List<Payment> calculateSumForAllInstances();
+    Payment getLastPaymentForUser(int payerId);
 
     ObjectAndMessage acceptPayment(Payment payment);
+    double getAllPaymentsForOnePayer(int payerId);
     String deletePayment(int paymentId);
 
 }

@@ -10,13 +10,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ReturnProductDAO {
+
     List<ReturnProduct> getAll();
-
-    ReturnProduct getByDocumentNo(String documnetNo);
-
+    ReturnProduct getLastReturnByCustomer(int customerId);
+    ReturnProduct getByDocumentNo(String documentNo);
     ReturnProduct getByCustomerId(int id);
-
     ObjectAndMessage save(ReturnWithItemsDTO returnProduct);
-
     ObjectAndMessage deleteById(int id);
+
 }

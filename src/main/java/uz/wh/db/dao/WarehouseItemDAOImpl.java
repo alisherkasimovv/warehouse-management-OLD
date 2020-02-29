@@ -32,6 +32,12 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
         return repository.findByWarehouseIdAndProductIdAndDeletedFalse(warehouseId, productId);
     }
 
+    /**
+     * Method registers income of the item to chosen warehouse.
+     *
+     * @param item Registering item.
+     * @param warehouseId Chosen warehouse id.
+     */
     @Override
     public void registerIncomeToWarehouse(Item item, int warehouseId) {
         WarehouseItem wItem =
@@ -51,6 +57,12 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
 
     }
 
+    /**
+     * Method registers outgo of item from chosen warehouse.
+     *
+     * @param item Registering item object.
+     * @param warehouseId Chosen warehouse id.
+     */
     @Override
     public void registerOutgoFromWarehouse(Item item, int warehouseId) {
         WarehouseItem wItem =
@@ -60,10 +72,21 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
             if (wItem.getQuantity() < item.getQuantity()) return;
 
             wItem.setQuantity(wItem.getQuantity() - item.getQuantity());
+
+            // if quantity of the item in warehouse will become equal to 0
+            // this item will be deleted from warehouse
+            if (wItem.getQuantity() == 0) {
+                repository.delete(wItem);
+            }
         } else {
             return;
         }
         repository.save(wItem);
 
+    }
+
+    @Override
+    public double countAllItemsByWarehouse(int warehouseId) {
+        return repository.countAllByWarehouseId(warehouseId);
     }
 }

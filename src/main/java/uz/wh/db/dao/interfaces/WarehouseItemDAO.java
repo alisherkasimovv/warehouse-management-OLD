@@ -12,6 +12,6 @@ public interface WarehouseItemDAO {
     WarehouseItem getItemForWarehouse(int warehouseId, int productId);
     void registerIncomeToWarehouse(Item item, int warehouseId);
     void registerOutgoFromWarehouse(Item item, int warehouseId);
-
+    double countAllItemsByWarehouse(int warehouseId);
 
 }

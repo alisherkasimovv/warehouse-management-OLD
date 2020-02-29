@@ -35,6 +35,16 @@ public class ItemDAOImpl implements ItemDAO {
         return repository.findAllByDocumentId(documentId);
     }
 
+    /**
+     * Saving document items and registering them on warehouse according to document type.
+     * Income and Return documents will increase the count of items, but Outgo document
+     * will decrease count of items from particular warehouse.
+     *
+     * @param items List of registered items.
+     * @param documentId Receiving pre-generated document id.
+     * @param type Document type according which items will be registered in warehouse.
+     * @param warehouseId Chosen warehouse id.
+     */
     @Override
     public void saveItemList(List<Item> items, String documentId, DocumentType type, int warehouseId) {
         for (Item item : items) {

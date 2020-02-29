@@ -12,7 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "document_returnproducs")
+@Table(name = "document_return_products")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter

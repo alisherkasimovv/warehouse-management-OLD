@@ -31,9 +31,9 @@ public class OrderController {
         return new ResponseEntity<>(orderDAO.getByDocumentNo(documentNo), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/get/{customerid}", method = RequestMethod.GET)
-    public ResponseEntity<Order> getByCustomerName(@PathVariable int customerid) {
-        return new ResponseEntity<>(orderDAO.getByCustomerId(customerid), HttpStatus.OK);
+    @RequestMapping(value = "/get/{customerId}", method = RequestMethod.GET)
+    public ResponseEntity<Order> getByCustomerName(@PathVariable int customerId) {
+        return new ResponseEntity<>(orderDAO.getByCustomerId(customerId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save")

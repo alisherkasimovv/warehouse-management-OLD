@@ -9,16 +9,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface OutgoDAO {
+
     List<Outgo> getAll();
-
-    Outgo getByDocumentNo(String documnetNo);
-
+    Outgo getLastOutgoForCustomer(int customerId);
+    Outgo getByDocumentNo(String documentNo);
     Outgo getByCustomerId(int id);
-
     Outgo getByOrderedDate(LocalDateTime date);
-
     ObjectAndMessage save(OutgoWithItemsDTO outgo);
-
     ObjectAndMessage deleteById(int id);
 
 }

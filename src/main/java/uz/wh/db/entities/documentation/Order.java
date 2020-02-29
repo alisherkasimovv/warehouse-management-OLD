@@ -22,8 +22,7 @@ public class Order extends DocumentEntity {
     private String documentNo;
 
     @Column
-    private  int customerId;
-
+    private int customerId;
 
     @Column
     private double balance;

@@ -13,5 +13,6 @@ public interface WarehouseItemRepository extends JpaRepository<WarehouseItem, In
     List<WarehouseItem> countByWarehouseIdAndProductIdAndDeletedFalse(int warehouseId, int productId);
     WarehouseItem findByWarehouseIdAndProductIdAndDeletedFalse(int warehouseId, int productId);
     WarehouseItem findByWarehouseIdAndProductId(int warehouseId, int productId);
+    double countAllByWarehouseId(int warehouseId);
 
 }
