@@ -63,7 +63,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     @Override
     public ObjectAndMessage acceptPayment(Payment payment) {
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        objectAndMessage.setMessage("New payment has been accepted!");
+        objectAndMessage.setMessage("To'lov qabul qilindi!");
         objectAndMessage.setObject(repository.save(payment));
         return objectAndMessage;
     }
@@ -76,7 +76,7 @@ public class PaymentDAOImpl implements PaymentDAO {
     @Override
     public String deletePayment(int paymentId) {
         repository.deleteById(paymentId);
-        return "Payment has been deleted";
+        return "To'lov hisobdan chiqarildi";
     }
 
     @PersistenceContext

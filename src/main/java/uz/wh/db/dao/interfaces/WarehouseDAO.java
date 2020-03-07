@@ -1,7 +1,7 @@
 package uz.wh.db.dao.interfaces;
 
 import uz.wh.collections.ObjectAndMessage;
-import uz.wh.collections.WarehouseStatus;
+import uz.wh.collections.ItemOnWarehouse;
 import uz.wh.db.entities.Warehouse;
 
 import java.util.List;
@@ -12,9 +12,9 @@ public interface WarehouseDAO  {
     List<Warehouse> getAll();
     ObjectAndMessage saveWarehouse(Warehouse warehouse);
     String deleteWarehouse(int id);
-    List<WarehouseStatus> countProductsOnAllWarehouses();
-    WarehouseStatus countOneProductOnAllWarehouses(int productId);
-    List<WarehouseStatus> countProductsOnOneWarehouse(int warehouseId);
-    WarehouseStatus countOneProductOnOneWarehouse(int productId, int warehouseId);
+    List<ItemOnWarehouse> countProductsOnAllWarehouses();
+    ItemOnWarehouse countOneProductOnAllWarehouses(int productId);
+    List<ItemOnWarehouse> countProductsOnOneWarehouse(int warehouseId);
+    ItemOnWarehouse countOneProductOnOneWarehouse(int productId, int warehouseId);
 
 }

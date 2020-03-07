@@ -2,7 +2,7 @@ package uz.wh.db.entities;
 
 import lombok.Data;
 //import org.springframework.security.core.GrantedAuthority;
-import uz.wh.db.enums.UserTypes;
+import uz.wh.db.enums.UserType;
 
 import javax.persistence.*;
 
@@ -14,7 +14,7 @@ public class Role  {
     private int id;
 
     @Enumerated(EnumType.STRING)
-    private UserTypes type;
+    private UserType type;
 
 //    @Override
 //    public String getAuthority() {

@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.UserAndMessage;
 import uz.wh.collections.UserStats;
-import uz.wh.db.dao.StatsCollector;
+import uz.wh.db.dao.DataCollector;
 import uz.wh.db.dao.interfaces.UserDAO;
 import uz.wh.db.entities.User;
 
@@ -17,9 +17,9 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
     private UserDAO userDAO;
-    private StatsCollector collector;
+    private DataCollector collector;
 
-    public UserController(UserDAO userDAO, StatsCollector collector) {
+    public UserController(UserDAO userDAO, DataCollector collector) {
         this.userDAO = userDAO;
         this.collector = collector;
     }

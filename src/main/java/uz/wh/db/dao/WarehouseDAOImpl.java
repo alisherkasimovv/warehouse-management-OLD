@@ -2,7 +2,7 @@ package uz.wh.db.dao;
 
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
-import uz.wh.collections.WarehouseStatus;
+import uz.wh.collections.ItemOnWarehouse;
 import uz.wh.db.dao.interfaces.WarehouseDAO;
 import uz.wh.db.dao.interfaces.WarehouseItemDAO;
 import uz.wh.db.entities.Warehouse;
@@ -63,13 +63,13 @@ public class WarehouseDAOImpl implements WarehouseDAO {
             return "Tanlangan ombor ma'lumotlar bazasidan o'chirildi.";
         }
         return "Diqqat! Ombor bo'sh emas! Unda jami " + count + " mahsulot bor." +
-                "Omborni o'chirishdan oldin undagi mahsulotlarni boshqa omborlarga ko'chirish kerak.";
+                "Omborni o'chirishdan oldin undagi mahsulotlarni boshqa omborlarga ko'chirish lozim.";
     }
 
     @Override
     @Transactional
-    public List<WarehouseStatus> countProductsOnAllWarehouses() {
-        List<WarehouseStatus> warehouseStatusList = new ArrayList<>();
+    public List<ItemOnWarehouse> countProductsOnAllWarehouses() {
+        List<ItemOnWarehouse> itemOnWarehouseList = new ArrayList<>();
 
         String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
@@ -81,33 +81,39 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 
         if (resultset.size() > 0) {
             for (Object[] obj : resultset) {
-                WarehouseStatus warehouseStatus = new WarehouseStatus();
+                ItemOnWarehouse itemOnWarehouse = new ItemOnWarehouse();
 
-                warehouseStatus.setProductId((int) obj[0]);
-                warehouseStatus.setProductName((String) (obj[1]));
-                warehouseStatus.setWarehouseId((int) obj[2]);
-                warehouseStatus.setWarehouseName((String) obj[3]);
-                warehouseStatus.setQuantity((double) obj[4]);
-                warehouseStatus.setCost((double) obj[5]);
-                warehouseStatus.setPrice((double) obj[6]);
+                itemOnWarehouse.setProductId((int) obj[0]);
+                itemOnWarehouse.setProductName((String) (obj[1]));
+                itemOnWarehouse.setWarehouseId((int) obj[2]);
+                itemOnWarehouse.setWarehouseName((String) obj[3]);
+                itemOnWarehouse.setQuantity((double) obj[4]);
+                itemOnWarehouse.setCost((double) obj[5]);
+                itemOnWarehouse.setPrice((double) obj[6]);
 
                 double total;
                 total = (double) obj[5] * (double) obj[4];
-                warehouseStatus.setTotalCost(total);
+                itemOnWarehouse.setTotalCost(total);
                 total = (double) obj[6] * (double) obj[4];
-                warehouseStatus.setTotalPrice(total);
+                itemOnWarehouse.setTotalPrice(total);
 
-                warehouseStatusList.add(warehouseStatus);
+                itemOnWarehouseList.add(itemOnWarehouse);
             }
         }
 
-        return warehouseStatusList;
+        return itemOnWarehouseList;
     }
 
+    /**
+     * Count one chosen item quantity on all warehouses.
+     *
+     * @param productId Chosen product id.
+     * @return Overall quantity of the product.
+     */
     @Override
-    public WarehouseStatus countOneProductOnAllWarehouses(int productId) {
+    public ItemOnWarehouse countOneProductOnAllWarehouses(int productId) {
 
-        WarehouseStatus warehouseStatus = new WarehouseStatus();
+        ItemOnWarehouse itemOnWarehouse = new ItemOnWarehouse();
 
         String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
@@ -120,30 +126,37 @@ public class WarehouseDAOImpl implements WarehouseDAO {
         if (resultset.size() > 0) {
             for (Object[] obj : resultset) {
 
-                warehouseStatus.setProductId((int) obj[0]);
-                warehouseStatus.setProductName((String) obj[1]);
-                warehouseStatus.setWarehouseId((int) obj[2]);
-                warehouseStatus.setWarehouseName((String) obj[3]);
-                warehouseStatus.setQuantity((double) obj[4]);
-                warehouseStatus.setCost((double) obj[5]);
-                warehouseStatus.setPrice((double) obj[6]);
+                itemOnWarehouse.setProductId((int) obj[0]);
+                itemOnWarehouse.setProductName((String) obj[1]);
+                itemOnWarehouse.setWarehouseId((int) obj[2]);
+                itemOnWarehouse.setWarehouseName((String) obj[3]);
+                itemOnWarehouse.setQuantity((double) obj[4]);
+                itemOnWarehouse.setCost((double) obj[5]);
+                itemOnWarehouse.setPrice((double) obj[6]);
 
                 double total;
                 total = (double) obj[5] * (double) obj[4];
-                warehouseStatus.setTotalCost(total);
+                itemOnWarehouse.setTotalCost(total);
                 total = (double) obj[6] * (double) obj[4];
-                warehouseStatus.setTotalPrice(total);
+                itemOnWarehouse.setTotalPrice(total);
 
             }
         }
 
-        return warehouseStatus;
+        return itemOnWarehouse;
     }
 
+    /**
+     * Method calculates count of all items in the warehouse and sends back
+     * list of these items.
+     *
+     * @param warehouseId Chosen warehouse id.
+     * @return List of items with their count.
+     */
     @Override
-    public List<WarehouseStatus> countProductsOnOneWarehouse(int warehouseId) {
+    public List<ItemOnWarehouse> countProductsOnOneWarehouse(int warehouseId) {
 
-        List<WarehouseStatus> warehouseStatusList = new ArrayList<>();
+        List<ItemOnWarehouse> itemOnWarehouseList = new ArrayList<>();
 
         String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
@@ -155,32 +168,32 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 
         if (resultset.size() > 0) {
             for (Object[] obj : resultset) {
-                WarehouseStatus warehouseStatus = new WarehouseStatus();
+                ItemOnWarehouse itemOnWarehouse = new ItemOnWarehouse();
 
-                warehouseStatus.setProductId((int) obj[0]);
-                warehouseStatus.setProductName((String) obj[1]);
-                warehouseStatus.setWarehouseId((int) obj[2]);
-                warehouseStatus.setWarehouseName((String) obj[3]);
-                warehouseStatus.setQuantity((double) obj[4]);
-                warehouseStatus.setCost((double) obj[5]);
-                warehouseStatus.setPrice((double) obj[6]);
+                itemOnWarehouse.setProductId((int) obj[0]);
+                itemOnWarehouse.setProductName((String) obj[1]);
+                itemOnWarehouse.setWarehouseId((int) obj[2]);
+                itemOnWarehouse.setWarehouseName((String) obj[3]);
+                itemOnWarehouse.setQuantity((double) obj[4]);
+                itemOnWarehouse.setCost((double) obj[5]);
+                itemOnWarehouse.setPrice((double) obj[6]);
 
                 double total;
                 total = (double) obj[5] * (double) obj[4];
-                warehouseStatus.setTotalCost(total);
+                itemOnWarehouse.setTotalCost(total);
                 total = (double) obj[6] * (double) obj[4];
-                warehouseStatus.setTotalPrice(total);
+                itemOnWarehouse.setTotalPrice(total);
 
-                warehouseStatusList.add(warehouseStatus);
+                itemOnWarehouseList.add(itemOnWarehouse);
             }
         }
 
-        return warehouseStatusList;
+        return itemOnWarehouseList;
     }
 
     @Override
-    public WarehouseStatus countOneProductOnOneWarehouse(int productId, int warehouseId) {
-        WarehouseStatus warehouseStatus = new WarehouseStatus();
+    public ItemOnWarehouse countOneProductOnOneWarehouse(int productId, int warehouseId) {
+        ItemOnWarehouse itemOnWarehouse = new ItemOnWarehouse();
 
         String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
@@ -193,23 +206,23 @@ public class WarehouseDAOImpl implements WarehouseDAO {
         if (resultset.size() > 0) {
             for (Object[] obj : resultset) {
 
-                warehouseStatus.setProductId((int) obj[0]);
-                warehouseStatus.setProductName((String) obj[1]);
-                warehouseStatus.setWarehouseId((int) obj[2]);
-                warehouseStatus.setWarehouseName((String) obj[3]);
-                warehouseStatus.setQuantity((double) obj[4]);
-                warehouseStatus.setCost((double) obj[5]);
-                warehouseStatus.setPrice((double) obj[6]);
+                itemOnWarehouse.setProductId((int) obj[0]);
+                itemOnWarehouse.setProductName((String) obj[1]);
+                itemOnWarehouse.setWarehouseId((int) obj[2]);
+                itemOnWarehouse.setWarehouseName((String) obj[3]);
+                itemOnWarehouse.setQuantity((double) obj[4]);
+                itemOnWarehouse.setCost((double) obj[5]);
+                itemOnWarehouse.setPrice((double) obj[6]);
 
                 double total;
                 total = (double) obj[5] * (double) obj[4];
-                warehouseStatus.setTotalCost(total);
+                itemOnWarehouse.setTotalCost(total);
                 total = (double) obj[6] * (double) obj[4];
-                warehouseStatus.setTotalPrice(total);
+                itemOnWarehouse.setTotalPrice(total);
 
             }
         }
-        return warehouseStatus;
+        return itemOnWarehouse;
     }
 
     @PersistenceContext

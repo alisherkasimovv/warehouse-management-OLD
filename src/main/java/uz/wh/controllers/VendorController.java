@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
+import uz.wh.collections.UserStats;
+import uz.wh.db.dao.DataCollector;
 import uz.wh.db.dao.interfaces.VendorDAO;
 import uz.wh.db.entities.Vendor;
 
@@ -15,14 +17,21 @@ import java.util.List;
 @CrossOrigin
 public class VendorController {
     private VendorDAO vendorDAO;
+    private DataCollector collector;
 
-    public VendorController(VendorDAO vendorDAO) {
+    public VendorController(VendorDAO vendorDAO, DataCollector collector) {
         this.vendorDAO = vendorDAO;
+        this.collector = collector;
     }
 
     @GetMapping(value = "/get")
     public ResponseEntity<List<Vendor>> getAll() {
         return new ResponseEntity<>(vendorDAO.getAll(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/get/statistics/{vendorId}")
+    public ResponseEntity<UserStats> getStatisticsForVendor(@PathVariable int vendorId) {
+        return new ResponseEntity<>(collector.collectStatsForUser(vendorId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save")

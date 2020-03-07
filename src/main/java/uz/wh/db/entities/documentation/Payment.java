@@ -27,7 +27,7 @@ public class Payment extends DocumentEntity {
     @Column(name = "payment_date")
     private LocalDateTime paymentDate;
 
-    @Column(name = "payer_type")
+    @Column(name = "payment_type")
     @Enumerated(EnumType.STRING)
     private PaymentType paymentType;
 

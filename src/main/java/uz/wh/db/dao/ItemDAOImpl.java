@@ -64,7 +64,6 @@ public class ItemDAOImpl implements ItemDAO {
 
         }
         repository.saveAll(items);
-
     }
 
     @Override

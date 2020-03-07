@@ -11,7 +11,7 @@ import javax.persistence.Column;
 @NoArgsConstructor
 @Getter
 @Setter
-public class WarehouseStatus {
+public class ItemOnWarehouse {
 
     @Column(name = "productId")
     private int productId;

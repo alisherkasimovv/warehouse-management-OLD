@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
 import uz.wh.db.entities.base.BaseEntity;
-import uz.wh.db.enums.UserTypes;
+import uz.wh.db.enums.UserType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -44,7 +44,7 @@ public class User extends BaseEntity {
     @Nullable
     @Column(name = "user_type")
     @Enumerated(EnumType.STRING)
-    private UserTypes userTypes;
+    private UserType userType;
 
 }
 //    @ManyToMany

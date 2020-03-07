@@ -37,21 +37,6 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public User getByFirstName(String firstName) {
-        return repository.findByFirstName(firstName);
-    }
-
-    @Override
-    public User getByLastName(String lastName) {
-        return repository.findByLastName(lastName);
-    }
-
-    @Override
-    public User getByAddress(String address) {
-        return repository.findByAddress(address);
-    }
-
-    @Override
     public String deleteById(int id) {
         User user = repository.findById(id);
         user.setDeleted(true);
@@ -65,19 +50,14 @@ public class UserDAOImpl implements UserDAO {
         UserAndMessage message = new UserAndMessage();
         User temp = repository.findById(user.getId());
         if (temp != null) {
-            temp.setUsername(user.getUsername());
-            temp.setPassword(user.getPassword());
-            temp.setFirstName(user.getFirstName());
-            temp.setLastName(user.getLastName());
-            temp.setAddress(user.getAddress());
-            temp.setPhone(user.getPhone());
-            temp.setUserTypes(user.getUserTypes());
+            temp = user;
             saved = repository.save(temp);
+            message.setMessage("Foydalanuvchi yangilandi.");
 
         } else {
             saved = repository.save(user);
+            message.setMessage("Yangi, " + saved.getFirstName() + " ismli fodalanuvchi ilovaga qo'shildi");
         }
-        message.setMessage("User successfully saved!");
         message.setUser(saved);
         return message;
     }
