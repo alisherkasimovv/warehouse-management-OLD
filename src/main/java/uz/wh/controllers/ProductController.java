@@ -4,6 +4,7 @@ package uz.wh.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.ProductDAO;
 import uz.wh.db.entities.Product;
 
@@ -26,9 +27,8 @@ public class ProductController  {
     public ResponseEntity<Product> getById(@PathVariable int id){return new ResponseEntity<>(productDAO.getById(id),HttpStatus.OK);}
 
     @PostMapping(value = "/save")
-    public ResponseEntity<List<Product>> save(@Valid @RequestBody Product product){
-    productDAO.saveProduct(product);
-    return new ResponseEntity<>(productDAO.getAll(),HttpStatus.OK);
+    public ResponseEntity<ObjectAndMessage> save(@Valid @RequestBody Product product){
+    return new ResponseEntity<>(productDAO.saveProduct(product),HttpStatus.OK);
     }
 
     @PostMapping(value = "/delete/{id}")

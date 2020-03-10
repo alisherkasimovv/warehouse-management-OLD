@@ -1,6 +1,7 @@
 package uz.wh.db.dao;
 
 import org.springframework.stereotype.Service;
+import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.ProductDAO;
 import uz.wh.db.entities.Product;
 import uz.wh.db.entities.User;
@@ -18,8 +19,21 @@ public class ProductDAOImpl implements ProductDAO {
     }
 
     @Override
-    public void saveProduct(Product product) {
-        productRepository.save(product);
+    public ObjectAndMessage saveProduct(Product product) {
+        Product saved;
+        ObjectAndMessage oam = new ObjectAndMessage();
+
+        Product temp = productRepository.findById(product.getId());
+        if (temp != null) {
+            temp = product;
+            saved = productRepository.save(temp);
+            oam.setMessage("Mahsulot haqidagi ma'lumot yangilandi");
+        } else {
+            saved = productRepository.save(product);
+            oam.setMessage("Yangi mahsulot yaratildi");
+        }
+        oam.setObject(saved);
+        return oam;
     }
 
     @Override

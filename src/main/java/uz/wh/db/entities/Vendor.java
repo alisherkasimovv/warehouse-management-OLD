@@ -17,7 +17,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Getter
 @Setter
-
 public class Vendor extends BaseEntity {
 
     @Column

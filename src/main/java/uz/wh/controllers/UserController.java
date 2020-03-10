@@ -8,6 +8,7 @@ import uz.wh.collections.UserStats;
 import uz.wh.db.dao.DataCollector;
 import uz.wh.db.dao.interfaces.UserDAO;
 import uz.wh.db.entities.User;
+import uz.wh.db.enums.UserType;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -27,6 +28,11 @@ public class UserController {
     @GetMapping("/get")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userDAO.getAllByDeletedFalse(), HttpStatus.OK);
+    }
+
+    @GetMapping("/get/userTypeIs={userType}")
+    public ResponseEntity<List<User>> getAllUsersByTheirTypes(@PathVariable String userType) {
+        return new ResponseEntity<>(userDAO.getAllUsersByTheirType(UserType.valueOf(userType)), HttpStatus.OK);
     }
 
     @GetMapping("/get/deleted")

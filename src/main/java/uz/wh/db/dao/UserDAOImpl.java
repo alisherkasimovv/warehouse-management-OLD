@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import uz.wh.collections.UserAndMessage;
 import uz.wh.db.dao.interfaces.UserDAO;
 import uz.wh.db.entities.User;
+import uz.wh.db.enums.UserType;
 import uz.wh.db.repositories.UserRepository;
 
 import java.util.List;
@@ -24,6 +25,11 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public List<User> getAllByDeletedTrue() {
         return repository.findAllByDeletedTrue();
+    }
+
+    @Override
+    public List<User> getAllUsersByTheirType(UserType userType) {
+        return repository.findAllByUserTypeAndDeletedFalse(userType);
     }
 
     @Override

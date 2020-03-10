@@ -1,5 +1,7 @@
 package uz.wh.db.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.UserStats;
 import uz.wh.db.dao.interfaces.*;
@@ -22,6 +24,8 @@ public class DataCollector {
     private PaymentDAO paymentDAO;
     private ReturnProductDAO returnDAO;
     private EntityManager em;
+
+    private Logger logger = LoggerFactory.getLogger(DataCollector.class);
 
     public DataCollector(
             IncomeDAO incomeDAO,
@@ -53,10 +57,10 @@ public class DataCollector {
     public List<ProductWithWarehouseQtyDTO> collectAllProductsAndTheirCounts() {
         List<ProductWithWarehouseQtyDTO> products = new ArrayList<>();
 
-        String QUERY = "SELECT prod.id, prod.name, prod.description, prod.meansurement, dwi.quantity, dw.name " +
+        String QUERY = "SELECT prod.id, prod.name, prod.description, prod.measurement, dwi.quantity, dwi.price, dw.name " +
                         "FROM Product prod " +
-                        "INNER JOIN WarehouseItem dwi on prod.id = dwi.productId " +
-                        "INNER JOIN Warehouse dw on dwi.warehouseId = dw.id " +
+                        "LEFT JOIN WarehouseItem dwi on prod.id = dwi.productId " +
+                        "LEFT JOIN Warehouse dw on dwi.warehouseId = dw.id " +
                         "ORDER BY prod.id DESC";
         Query query = em.createQuery(QUERY);
         List<Object[]> resultList = query.getResultList();
@@ -68,16 +72,24 @@ public class DataCollector {
                     ProductWithWarehouseQtyDTO pww = new ProductWithWarehouseQtyDTO();
                     currentId = (int) obj[0];
 
-                    pww.setProductId((int) obj[0]);
-                    pww.setProductName((String) obj[1]);
+                    pww.setId((int) obj[0]);
+                    pww.setName((String) obj[1]);
                     pww.setDescription((String) obj[2]);
                     pww.setMeasurement((String) obj[3]);
-
-                    pww.setWarehouses(new WarehouseCountDTO((String) obj[5], (double) obj[4]));
+                    
+                    try {
+                        pww.setWarehouses(new WarehouseCountDTO((String) obj[6], (double) obj[4]));
+                        pww.setOverallQuantity((double) obj[4]);
+                        pww.setPrice((double) obj[5]);
+                    } catch (NullPointerException e) {
+                        logger.info(pww.getName() + " has no any entries in warehouses.");
+                    }
 
                     products.add(pww);
                 } else {
-                    products.get(products.size() - 1).setWarehouses(new WarehouseCountDTO((String) obj[5], (double) obj[4]));
+                    products.get(products.size() - 1).setWarehouses(new WarehouseCountDTO((String) obj[6], (double) obj[4]));
+                    products.get(products.size() - 1).setOverallQuantity((double) obj[4]);
+                    products.get(products.size() - 1).setPrice((double) obj[5]);
                 }
             }
         }

@@ -6,31 +6,33 @@ import java.util.List;
 
 public class ProductWithWarehouseQtyDTO {
 
-    private int productId;
-    private String productName;
+    private int id;
+    private String name;
     private String description;
     private String measurement;
-    private String front;
+    private double price;
+    private double overallQuantity;
     private List<WarehouseCountDTO> warehouses;
 
     public ProductWithWarehouseQtyDTO() {
+        this.overallQuantity = 0;
         this.warehouses = new ArrayList<>();
     }
 
-    public int getProductId() {
-        return productId;
+    public int getId() {
+        return id;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {
@@ -47,6 +49,22 @@ public class ProductWithWarehouseQtyDTO {
 
     public void setMeasurement(String measurement) {
         this.measurement = measurement;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getOverallQuantity() {
+        return overallQuantity;
+    }
+
+    public void setOverallQuantity(double overallQuantity) {
+        this.overallQuantity += overallQuantity;
     }
 
     public List<WarehouseCountDTO> getWarehouses() {

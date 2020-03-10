@@ -25,7 +25,7 @@ public class Product extends BaseEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "meansurement")
-    private String meansurement;
+    @Column(name = "measurement")
+    private String measurement;
 
 }
