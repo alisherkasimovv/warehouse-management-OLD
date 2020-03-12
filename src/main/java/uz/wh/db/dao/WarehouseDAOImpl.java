@@ -111,13 +111,13 @@ public class WarehouseDAOImpl implements WarehouseDAO {
      * @return Overall quantity of the product.
      */
     @Override
-    public ItemOnWarehouse countOneProductOnAllWarehouses(int productId) {
+    public List<ItemOnWarehouse> countOneProductOnAllWarehouses(int productId) {
 
-        ItemOnWarehouse itemOnWarehouse = new ItemOnWarehouse();
+        List<ItemOnWarehouse> iow = new ArrayList<>();
 
         String QUERY = "SELECT p.id, p.name, w.id, w.quantity, w.cost, w.price " +
                 "FROM Product p " +
-                "INNER JOIN WarehouseItem w ON w.productId=p.id " + "WHERE p.id=" + productId;
+                "INNER JOIN WarehouseItem w ON w.productId = p.id " + "WHERE p.id=" + productId;
 
         Query query = em.createQuery(QUERY);
 
@@ -125,6 +125,8 @@ public class WarehouseDAOImpl implements WarehouseDAO {
 
         if (resultset.size() > 0) {
             for (Object[] obj : resultset) {
+
+                ItemOnWarehouse itemOnWarehouse = new ItemOnWarehouse();
 
                 itemOnWarehouse.setProductId((int) obj[0]);
                 itemOnWarehouse.setProductName((String) obj[1]);
@@ -140,10 +142,11 @@ public class WarehouseDAOImpl implements WarehouseDAO {
                 total = (double) obj[6] * (double) obj[4];
                 itemOnWarehouse.setTotalPrice(total);
 
+                iow.add(itemOnWarehouse);
             }
         }
 
-        return itemOnWarehouse;
+        return iow;
     }
 
     /**
@@ -154,7 +157,7 @@ public class WarehouseDAOImpl implements WarehouseDAO {
      * @return List of items with their count.
      */
     @Override
-    public List<ItemOnWarehouse> countProductsOnOneWarehouse(int warehouseId) {
+    public List<ItemOnWarehouse> countAllProductsOnOneWarehouse(int warehouseId) {
 
         List<ItemOnWarehouse> itemOnWarehouseList = new ArrayList<>();
 

@@ -39,11 +39,11 @@ public class WarehouseController {
 
     @GetMapping(value = "/get/count/warehouse={warehouseId}")
     public ResponseEntity<List<ItemOnWarehouse>> getCountWarehouseId(@PathVariable int warehouseId){
-        return new ResponseEntity<>(warehouseDAO.countProductsOnOneWarehouse(warehouseId),HttpStatus.OK);
+        return new ResponseEntity<>(warehouseDAO.countAllProductsOnOneWarehouse(warehouseId),HttpStatus.OK);
     }
 
     @GetMapping(value = "/get/count/product={id}")
-    public ResponseEntity<ItemOnWarehouse> getCountProductId(@PathVariable int id){
+    public ResponseEntity<List<ItemOnWarehouse>> getCountProductId(@PathVariable int id){
         return new ResponseEntity<>(warehouseDAO.countOneProductOnAllWarehouses(id),HttpStatus.OK);
     }
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import uz.wh.collections.UserStats;
 import uz.wh.db.dao.interfaces.*;
 import uz.wh.db.dto.ProductWithWarehouseQtyDTO;
+import uz.wh.db.dto.UniversalCollectionTO;
 import uz.wh.db.dto.WarehouseCountDTO;
 
 import javax.persistence.EntityManager;
@@ -23,6 +24,8 @@ public class DataCollector {
     private OutgoDAO outgoDAO;
     private PaymentDAO paymentDAO;
     private ReturnProductDAO returnDAO;
+    private ProductDAO productDAO;
+    private WarehouseDAO warehouseDAO;
     private EntityManager em;
 
     private Logger logger = LoggerFactory.getLogger(DataCollector.class);
@@ -32,12 +35,14 @@ public class DataCollector {
             OrderDAO orderDAO,
             OutgoDAO outgoDAO,
             PaymentDAO paymentDAO,
-            ReturnProductDAO returnDAO) {
+            ReturnProductDAO returnDAO, ProductDAO productDAO, WarehouseDAO warehouseDAO) {
         this.incomeDAO = incomeDAO;
         this.orderDAO = orderDAO;
         this.outgoDAO = outgoDAO;
         this.paymentDAO = paymentDAO;
         this.returnDAO = returnDAO;
+        this.productDAO = productDAO;
+        this.warehouseDAO = warehouseDAO;
     }
 
     public UserStats collectStatsForUser(int userId) {
@@ -95,6 +100,13 @@ public class DataCollector {
         }
 
         return products;
+    }
+
+    public UniversalCollectionTO getProductsAndWarehouses() {
+        return new UniversalCollectionTO(
+                productDAO.getAll(),
+                warehouseDAO.getAll()
+        );
     }
 
     @PersistenceContext

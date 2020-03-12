@@ -13,8 +13,8 @@ public interface WarehouseDAO  {
     ObjectAndMessage saveWarehouse(Warehouse warehouse);
     String deleteWarehouse(int id);
     List<ItemOnWarehouse> countProductsOnAllWarehouses();
-    ItemOnWarehouse countOneProductOnAllWarehouses(int productId);
-    List<ItemOnWarehouse> countProductsOnOneWarehouse(int warehouseId);
+    List<ItemOnWarehouse> countOneProductOnAllWarehouses(int productId);
+    List<ItemOnWarehouse> countAllProductsOnOneWarehouse(int warehouseId);
     ItemOnWarehouse countOneProductOnOneWarehouse(int productId, int warehouseId);
 
 }

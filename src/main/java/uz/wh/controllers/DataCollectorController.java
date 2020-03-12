@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import uz.wh.db.dao.DataCollector;
 import uz.wh.db.dto.ProductWithWarehouseQtyDTO;
+import uz.wh.db.dto.UniversalCollectionTO;
 
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class DataCollectorController {
     public ResponseEntity<List<ProductWithWarehouseQtyDTO>> collectAllProducts() {
         return new ResponseEntity<>(
                 collector.collectAllProductsAndTheirCounts(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/products-n-warehouses")
+    public ResponseEntity<UniversalCollectionTO> getAllProductsAndWarehouses() {
+        return new ResponseEntity<>(collector.getProductsAndWarehouses(), HttpStatus.OK);
     }
 
 }

@@ -7,7 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @MappedSuperclass
 @Getter
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public abstract class DocumentEntity extends BaseEntity {
 
     @Column(name = "order_date")
-    private LocalDateTime orderDate;
+    private LocalDate orderDate;
 
     @Column
     private boolean status;
