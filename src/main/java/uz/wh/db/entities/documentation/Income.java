@@ -19,16 +19,15 @@ import javax.persistence.Table;
 @Setter
 public class Income extends DocumentEntity {
 
-    @Column
-    private String documentNo;
+    @Column(name = "vendor_id")
+    private int vendorId;
 
-    @Column
-    private  int vendorId;
-
-    @Column
+    @Column(name = "cost")
     private double cost;
 
-    @Column
+    // Field shows balance of vendor.
+    // Will be calculated from distraction payment from cost.
+    @Column(name = "balance")
     private double balance;
 
 }

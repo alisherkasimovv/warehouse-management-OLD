@@ -19,17 +19,14 @@ import javax.persistence.Table;
 @Setter
 public class ReturnProduct extends DocumentEntity {
 
-    @Column
-    private String documentNo;
-
-    @Column
+    @Column(name = "customer_id")
     private int customerId;
 
     @Nullable
-    @Column
+    @Column(name = "price")
     private double price;
 
-    @Column
+    @Column(name = "amount")
     private double amount;
 
 

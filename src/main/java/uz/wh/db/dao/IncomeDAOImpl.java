@@ -53,7 +53,7 @@ public class IncomeDAOImpl implements IncomeDAO {
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         itemDAO.saveItemList(
                 incomeWithItems.getItems(),
-                incomeWithItems.getIncome().getDocumentNo(),
+                incomeWithItems.getIncome().getId(),
                 incomeWithItems.getIncome().getDocumentType(),
                 incomeWithItems.getWarehouseId());
 

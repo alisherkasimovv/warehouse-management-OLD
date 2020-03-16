@@ -48,7 +48,7 @@ public class ReturnProductDAOImpl implements ReturnProductDAO {
         ReturnProduct temp = returnProduct.getReturnProduct();
         itemDAO.saveItemList(
                 returnProduct.getItems(),
-                returnProduct.getReturnProduct().getDocumentNo(),
+                returnProduct.getReturnProduct().getId(),
                 returnProduct.getReturnProduct().getDocumentType(),
                 returnProduct.getWarehouseId()
         );

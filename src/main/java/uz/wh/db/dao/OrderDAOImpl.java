@@ -52,7 +52,7 @@ public class OrderDAOImpl implements OrderDAO {
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         itemDAO.saveItemList(
                 order.getItems(),
-                order.getOrder().getDocumentNo(),
+                order.getOrder().getId(),
                 order.getOrder().getDocumentType(),
                 order.getWarehouseId()
         );

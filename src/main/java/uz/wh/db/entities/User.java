@@ -23,22 +23,22 @@ import javax.persistence.Enumerated;
 @Entity(name = "db_users")
 public class User extends BaseEntity {
 
-    @Column(name = "db_username", unique = true)
+    @Column(name = "username", unique = true)
     private String username;
 
-    @Column(name = "db_password", nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "db_firstname")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "db_lastname")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "db_phonenumber")
+    @Column(name = "phone_number")
     private String phone;
 
-    @Column(name = "db_address")
+    @Column(name = "address")
     private String address;
 
     @Nullable

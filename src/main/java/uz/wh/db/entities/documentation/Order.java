@@ -19,9 +19,6 @@ import javax.persistence.Table;
 public class Order extends DocumentEntity {
 
     @Column
-    private String documentNo;
-
-    @Column
     private int customerId;
 
     @Column

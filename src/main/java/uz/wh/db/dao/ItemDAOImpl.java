@@ -46,7 +46,7 @@ public class ItemDAOImpl implements ItemDAO {
      * @param warehouseId Chosen warehouse id.
      */
     @Override
-    public void saveItemList(List<Item> items, String documentId, DocumentType type, int warehouseId) {
+    public void saveItemList(List<Item> items, int documentId, DocumentType type, int warehouseId) {
         for (Item item : items) {
             item.setDocumentId(documentId);
 
@@ -67,7 +67,7 @@ public class ItemDAOImpl implements ItemDAO {
     }
 
     @Override
-    public void saveOneItem(Item item, String documentId) {
+    public void saveOneItem(Item item, int documentId) {
         item.setDocumentId(documentId);
         repository.save(item);
     }

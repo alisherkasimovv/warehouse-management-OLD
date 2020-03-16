@@ -17,7 +17,10 @@ public abstract class DocumentEntity extends BaseEntity {
     @Column(name = "order_date")
     private LocalDate orderDate;
 
-    @Column
+    @Column(name = "document_number")
+    private String documentNo;
+
+    @Column(name = "document_status")
     private boolean status;
 
     @Column(name = "document_type")

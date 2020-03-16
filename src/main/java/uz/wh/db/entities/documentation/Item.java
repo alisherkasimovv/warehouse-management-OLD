@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
+import uz.wh.db.entities.base.BaseEntity;
 import uz.wh.db.entities.base.DocumentEntity;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Item extends DocumentEntity {
+public class Item extends BaseEntity {
 
     @Nullable
     @Column(name = "product_id")
@@ -23,7 +24,7 @@ public class Item extends DocumentEntity {
 
     @Nullable
     @Column(name = "document_id")
-    private String documentId;
+    private int documentId;
 
     @Nullable
     @Column(name = "cost")
@@ -36,4 +37,5 @@ public class Item extends DocumentEntity {
     @Nullable
     @Column(name = "quantity")
     private double quantity;
+
 }

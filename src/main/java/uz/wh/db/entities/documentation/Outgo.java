@@ -19,16 +19,13 @@ import javax.persistence.Table;
 @Setter
 public class Outgo extends DocumentEntity {
 
-
-    private String documentNo;
-
-
+    @Column(name = "customer_id")
     private int customerId;
 
     @Nullable
     private double price;
 
-
+    @Column(name = "balance")
     private double balance;
 
 }

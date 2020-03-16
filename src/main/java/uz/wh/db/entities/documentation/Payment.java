@@ -8,7 +8,6 @@ import uz.wh.db.entities.base.DocumentEntity;
 import uz.wh.db.enums.PaymentType;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "document_payments")
@@ -23,9 +22,6 @@ public class Payment extends DocumentEntity {
 
     @Column(name = "amount")
     private double amount;
-
-    @Column(name = "payment_date")
-    private LocalDateTime paymentDate;
 
     @Column(name = "payment_type")
     @Enumerated(EnumType.STRING)

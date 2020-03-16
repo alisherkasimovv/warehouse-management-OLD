@@ -54,7 +54,7 @@ public class OutgoDAOImpl implements OutgoDAO {
         Outgo temp = outgo.getOutgo();
         itemDAO.saveItemList(
                 outgo.getItems(),
-                outgo.getOutgo().getDocumentNo(),
+                outgo.getOutgo().getId(),
                 outgo.getOutgo().getDocumentType(),
                 outgo.getWarehouseId()
         );

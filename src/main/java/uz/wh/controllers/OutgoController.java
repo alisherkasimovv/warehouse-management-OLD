@@ -27,14 +27,14 @@ public class OutgoController {
         return new ResponseEntity<>(outgoDAO.getAll(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/get/{documentNo}", method = RequestMethod.GET)
+    @RequestMapping(value = "/get/document={documentNo}", method = RequestMethod.GET)
     public ResponseEntity<Outgo> getDocumentNo(@PathVariable String documentNo) {
         return new ResponseEntity<>(outgoDAO.getByDocumentNo(documentNo), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/get/{customerid}", method = RequestMethod.GET)
-    public ResponseEntity<Outgo> getByCutomerName(@PathVariable int customerid) {
-        return new ResponseEntity<>(outgoDAO.getByCustomerId(customerid), HttpStatus.OK);
+    @RequestMapping(value = "/get/customer={customerId}", method = RequestMethod.GET)
+    public ResponseEntity<Outgo> getByCustomerName(@PathVariable int customerId) {
+        return new ResponseEntity<>(outgoDAO.getByCustomerId(customerId), HttpStatus.OK);
     }
 
     @PostMapping(value = "/save")

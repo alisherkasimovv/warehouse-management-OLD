@@ -21,8 +21,10 @@ public class Vendor extends BaseEntity {
 
     @Column
     private String name;
+
     @Column
     private String phone;
+
     @Column
     private String address;
 
