@@ -1,9 +1,9 @@
-package uz.wh.db.repositories;
+package uz.wh.db.repositories.documents;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.wh.db.entities.documentation.Outgo;
+import uz.wh.db.entities.documents.Outgo;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface OutgoRepository extends JpaRepository<Outgo,Integer> {
@@ -12,7 +12,7 @@ public interface OutgoRepository extends JpaRepository<Outgo,Integer> {
     Outgo findDistinctFirstByCustomerIdAndDeletedFalseOrderByIdDesc(int customerId);
     Outgo findById(int id);
     Outgo findByDocumentNo(String documentNo);
-    Outgo findByOrderDate(LocalDateTime date);
+    Outgo findByDocumentDate(LocalDate date);
     Outgo findByCustomerId(int id);
 
 }

@@ -1,11 +1,11 @@
-package uz.wh.db.dto;
+package uz.wh.db.dto.documents_dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.wh.db.entities.documentation.Item;
-import uz.wh.db.entities.documentation.ReturnProduct;
+import uz.wh.db.entities.documents.ReturnProduct;
+import uz.wh.db.entities.documents.items.ReturnProductItem;
 
 import java.util.List;
 
@@ -16,7 +16,6 @@ import java.util.List;
 public class ReturnWithItemsDTO {
 
     private ReturnProduct returnProduct;
-    private List<Item> items;
-    private int warehouseId;
+    private List<ReturnProductItem> items;
 
 }

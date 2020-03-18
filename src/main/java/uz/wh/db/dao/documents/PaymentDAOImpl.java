@@ -1,17 +1,14 @@
-package uz.wh.db.dao;
+package uz.wh.db.dao.documents;
 
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.PaymentDAO;
-import uz.wh.db.dao.interfaces.UserDAO;
-import uz.wh.db.dao.interfaces.VendorDAO;
-import uz.wh.db.entities.documentation.Payment;
+import uz.wh.db.entities.documents.Payment;
 import uz.wh.db.enums.PaymentType;
-import uz.wh.db.repositories.PaymentRepository;
+import uz.wh.db.repositories.documents.PaymentRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 

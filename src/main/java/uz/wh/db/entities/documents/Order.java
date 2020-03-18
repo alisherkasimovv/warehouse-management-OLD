@@ -1,10 +1,9 @@
-package uz.wh.db.entities.documentation;
+package uz.wh.db.entities.documents;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.lang.Nullable;
 import uz.wh.db.entities.base.DocumentEntity;
 
 import javax.persistence.Column;
@@ -12,22 +11,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "document_return_products")
+@Table(name = "document_orders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class ReturnProduct extends DocumentEntity {
+public class Order extends DocumentEntity {
 
-    @Column(name = "customer_id")
+    @Column
     private int customerId;
-
-    @Nullable
-    @Column(name = "price")
-    private double price;
-
-    @Column(name = "amount")
-    private double amount;
-
 
 }

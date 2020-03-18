@@ -1,9 +1,9 @@
-package uz.wh.db.repositories;
+package uz.wh.db.repositories.documents;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.wh.db.entities.documentation.Order;
+import uz.wh.db.entities.documents.Order;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order,Integer> {
@@ -13,5 +13,5 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
     Order findById(int id);
     Order findByDocumentNo(String documentNo);
     Order findByCustomerId(int id);
-    Order findByOrderDate(LocalDateTime date);
+    Order findByDocumentDate(LocalDate date);
 }

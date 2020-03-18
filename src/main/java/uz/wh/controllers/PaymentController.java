@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.PaymentDAO;
-import uz.wh.db.entities.documentation.Payment;
+import uz.wh.db.entities.documents.Payment;
 
 import javax.validation.Valid;
 import java.util.List;

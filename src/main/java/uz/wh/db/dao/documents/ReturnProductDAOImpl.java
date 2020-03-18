@@ -1,23 +1,28 @@
-package uz.wh.db.dao;
+package uz.wh.db.dao.documents;
 
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
-import uz.wh.db.dao.interfaces.ItemDAO;
 import uz.wh.db.dao.interfaces.ReturnProductDAO;
-import uz.wh.db.dto.ReturnWithItemsDTO;
-import uz.wh.db.entities.documentation.ReturnProduct;
-import uz.wh.db.repositories.ReturnProductRepository;
+import uz.wh.db.dao.interfaces.WarehouseItemDAO;
+import uz.wh.db.dto.documents_dto.ReturnWithItemsDTO;
+import uz.wh.db.entities.documents.ReturnProduct;
+import uz.wh.db.entities.documents.items.ReturnProductItem;
+import uz.wh.db.repositories.documents.ReturnProductItemRepository;
+import uz.wh.db.repositories.documents.ReturnProductRepository;
 
 import java.util.List;
 
 @Service
 public class ReturnProductDAOImpl implements ReturnProductDAO {
-    private ReturnProductRepository repository;
-    private ItemDAO itemDAO;
 
-    public ReturnProductDAOImpl(ReturnProductRepository repository1, ItemDAO itemDAO) {
-        repository = repository1;
-        this.itemDAO = itemDAO;
+    private ReturnProductRepository repository;
+    private ReturnProductItemRepository returnProductItemRepository;
+    private WarehouseItemDAO warehouseItemDAO;
+
+    public ReturnProductDAOImpl(ReturnProductRepository repository, ReturnProductItemRepository returnProductItemRepository, WarehouseItemDAO warehouseItemDAO) {
+        this.repository = repository;
+        this.returnProductItemRepository = returnProductItemRepository;
+        this.warehouseItemDAO = warehouseItemDAO;
     }
 
     @Override
@@ -46,25 +51,11 @@ public class ReturnProductDAOImpl implements ReturnProductDAO {
         ReturnProduct saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         ReturnProduct temp = returnProduct.getReturnProduct();
-        itemDAO.saveItemList(
-                returnProduct.getItems(),
-                returnProduct.getReturnProduct().getId(),
-                returnProduct.getReturnProduct().getDocumentType(),
-                returnProduct.getWarehouseId()
-        );
+        this.registerAndSaveReturnOfTheItem(returnProduct.getItems());
 
-//        if (temp != null) {
-//            temp.setDeleted(false);
-//            temp.setDocumentNo(outgo.getDocumentNo());
-//            temp.setCustomerId(outgo.getCustomerId());
-//            temp.setPrice(outgo.getPrice());
-//
-//            saved = repository.save(temp);
-//            objectAndMessage.setMessage("Outgo has been updated!");
-//        } else {
         saved = repository.save(temp);
-        objectAndMessage.setMessage("The product has been returned!");
-//        }
+        objectAndMessage.setMessage("Ro'yhatdagi mahsulotlar omborga qaytarildi");
+
         objectAndMessage.setObject(saved);
         return objectAndMessage;
     }
@@ -78,4 +69,13 @@ public class ReturnProductDAOImpl implements ReturnProductDAO {
 
         return objectAndMessage;
     }
+
+    private void registerAndSaveReturnOfTheItem(List<ReturnProductItem> list) {
+        for (ReturnProductItem item : list) {
+            this.warehouseItemDAO.registerReturnToWarehouse(item);
+        }
+
+        this.returnProductItemRepository.saveAll(list);
+    }
+
 }

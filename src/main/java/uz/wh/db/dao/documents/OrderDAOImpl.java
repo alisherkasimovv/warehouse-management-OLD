@@ -1,24 +1,26 @@
-package uz.wh.db.dao;
+package uz.wh.db.dao.documents;
 
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
-import uz.wh.db.dao.interfaces.ItemDAO;
 import uz.wh.db.dao.interfaces.OrderDAO;
-import uz.wh.db.dto.OrderWithItemsDTO;
-import uz.wh.db.entities.documentation.Order;
-import uz.wh.db.repositories.OrderRepository;
+import uz.wh.db.dto.documents_dto.OrderWithItemsDTO;
+import uz.wh.db.entities.documents.Order;
+import uz.wh.db.entities.documents.items.OrderItem;
+import uz.wh.db.repositories.documents.OrderItemRepository;
+import uz.wh.db.repositories.documents.OrderRepository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 @Service
 public class OrderDAOImpl implements OrderDAO {
 
     private OrderRepository repository;
-    private ItemDAO itemDAO;
+    private OrderItemRepository itemRepository;
 
-    public OrderDAOImpl(OrderRepository repository, ItemDAO itemDAO) {
+    public OrderDAOImpl(OrderRepository repository, OrderItemRepository itemRepository) {
         this.repository=repository;
-        this.itemDAO = itemDAO;
+        this.itemRepository = itemRepository;
     }
 
     @Override
@@ -42,20 +44,15 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
-    public Order getByOrderedDate(LocalDateTime date) {
-        return repository.findByOrderDate(date);
+    public Order getByOrderedDate(LocalDate date) {
+        return repository.findByDocumentDate(date);
     }
 
     @Override
     public ObjectAndMessage save(OrderWithItemsDTO order) {
         Order saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        itemDAO.saveItemList(
-                order.getItems(),
-                order.getOrder().getId(),
-                order.getOrder().getDocumentType(),
-                order.getWarehouseId()
-        );
+        this.registerAndSaveOrderItem(order.getItems());
 
         Order temp = repository.findById(order.getOrder().getId());
 
@@ -66,10 +63,10 @@ public class OrderDAOImpl implements OrderDAO {
             temp.setCustomerId(order.getOrder().getCustomerId());
 
             saved = repository.save(temp);
-            objectAndMessage.setMessage("Order has been updated!");
+            objectAndMessage.setMessage("Buyurtma ma'lumotlari yangilandi");
         } else {
             saved =repository.save(order.getOrder());
-            objectAndMessage.setMessage("New Order has been created!");
+            objectAndMessage.setMessage("Yangi buyurtma ro'yhatdan o'tkazildi");
         }
         objectAndMessage.setObject(saved);
         return objectAndMessage;
@@ -85,4 +82,9 @@ public class OrderDAOImpl implements OrderDAO {
         repository.save(order);
         return objectAndMessage;
     }
+
+    private void registerAndSaveOrderItem(List<OrderItem> list) {
+        this.itemRepository.saveAll(list);
+    }
+
 }

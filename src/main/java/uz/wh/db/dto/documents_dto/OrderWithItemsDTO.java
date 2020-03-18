@@ -1,11 +1,11 @@
-package uz.wh.db.dto;
+package uz.wh.db.dto.documents_dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.wh.db.entities.documentation.Item;
-import uz.wh.db.entities.documentation.Order;
+import uz.wh.db.entities.documents.Order;
+import uz.wh.db.entities.documents.items.OrderItem;
 
 import java.util.List;
 
@@ -16,6 +16,5 @@ import java.util.List;
 
 public class OrderWithItemsDTO {
     private Order order;
-    private List<Item> items;
-    private int warehouseId;
+    private List<OrderItem> items;
 }

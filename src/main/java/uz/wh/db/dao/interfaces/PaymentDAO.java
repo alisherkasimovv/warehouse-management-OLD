@@ -1,7 +1,7 @@
 package uz.wh.db.dao.interfaces;
 
 import uz.wh.collections.ObjectAndMessage;
-import uz.wh.db.entities.documentation.Payment;
+import uz.wh.db.entities.documents.Payment;
 import uz.wh.db.enums.PaymentType;
 
 import java.util.List;

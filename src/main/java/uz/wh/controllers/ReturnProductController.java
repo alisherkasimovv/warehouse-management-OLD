@@ -5,10 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.ReturnProductDAO;
-import uz.wh.db.dto.IncomeWithItemsDTO;
-import uz.wh.db.dto.ReturnWithItemsDTO;
-import uz.wh.db.entities.documentation.Income;
-import uz.wh.db.entities.documentation.ReturnProduct;
+import uz.wh.db.dto.documents_dto.ReturnWithItemsDTO;
+import uz.wh.db.entities.documents.ReturnProduct;
 
 import javax.validation.Valid;
 import java.util.List;

@@ -1,7 +1,7 @@
-package uz.wh.db.repositories;
+package uz.wh.db.repositories.documents;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.wh.db.entities.documentation.ReturnProduct;
+import uz.wh.db.entities.documents.ReturnProduct;
 
 import java.util.List;
 

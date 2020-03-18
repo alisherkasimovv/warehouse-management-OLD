@@ -4,11 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
-import uz.wh.db.dao.interfaces.IncomeDAO;
 import uz.wh.db.dao.interfaces.OutgoDAO;
-import uz.wh.db.dto.OutgoWithItemsDTO;
-import uz.wh.db.entities.documentation.Income;
-import uz.wh.db.entities.documentation.Outgo;
+import uz.wh.db.dto.documents_dto.OutgoWithItemsDTO;
+import uz.wh.db.entities.documents.Outgo;
 
 import javax.validation.Valid;
 import java.util.List;

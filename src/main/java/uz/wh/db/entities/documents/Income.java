@@ -1,4 +1,4 @@
-package uz.wh.db.entities.documentation;
+package uz.wh.db.entities.documents;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,7 +9,6 @@ import uz.wh.db.entities.base.DocumentEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "document_incomes")
@@ -22,13 +21,4 @@ public class Income extends DocumentEntity {
     @Column(name = "vendor_id")
     private int vendorId;
 
-    @Column(name = "cost")
-    private double cost;
-
-    // Field shows balance of vendor.
-    // Will be calculated from distraction payment from cost.
-    @Column(name = "balance")
-    private double balance;
-
 }
-

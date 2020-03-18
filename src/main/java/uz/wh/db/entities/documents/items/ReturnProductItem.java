@@ -1,31 +1,30 @@
-package uz.wh.db.entities.documentation;
+package uz.wh.db.entities.documents.items;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
-import uz.wh.db.entities.base.DocumentEntity;
+import uz.wh.db.entities.base.ItemEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "document_outgo")
+@Table(name = "document_return_items")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Outgo extends DocumentEntity {
-
-    @Column(name = "customer_id")
-    private int customerId;
+public class ReturnProductItem extends ItemEntity {
 
     @Nullable
+    @Column(name = "price")
     private double price;
 
-    @Column(name = "balance")
-    private double balance;
+    @Nullable
+    @Column(name = "price_total")
+    private double priceTotal;
 
 }

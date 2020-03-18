@@ -1,11 +1,11 @@
-package uz.wh.db.dto;
+package uz.wh.db.dto.documents_dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.wh.db.entities.documentation.Item;
-import uz.wh.db.entities.documentation.Outgo;
+import uz.wh.db.entities.documents.Outgo;
+import uz.wh.db.entities.documents.items.OutgoItem;
 
 import java.util.List;
 
@@ -16,7 +16,6 @@ import java.util.List;
 public class OutgoWithItemsDTO {
 
     private Outgo outgo;
-    private List<Item> items;
-    private int warehouseId;
+    private List<OutgoItem> items;
 
 }

@@ -1,22 +1,20 @@
-package uz.wh.db.entities.documentation;
+package uz.wh.db.entities.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.lang.Nullable;
-import uz.wh.db.entities.base.BaseEntity;
-import uz.wh.db.entities.base.DocumentEntity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
-@Entity
-@Table(name = "document_items")
+@MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Item extends BaseEntity {
+public abstract class ItemEntity extends BaseEntity {
 
     @Nullable
     @Column(name = "product_id")
@@ -27,12 +25,8 @@ public class Item extends BaseEntity {
     private int documentId;
 
     @Nullable
-    @Column(name = "cost")
-    private double cost;
-
-    @Nullable
-    @Column(name = "price")
-    private double price;
+    @Column(name = "warehouse_id")
+    private int warehouseId;
 
     @Nullable
     @Column(name = "quantity")

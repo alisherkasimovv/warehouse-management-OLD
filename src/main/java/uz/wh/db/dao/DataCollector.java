@@ -87,7 +87,7 @@ public class DataCollector {
                         pww.setOverallQuantity((double) obj[4]);
                         pww.setPrice((double) obj[5]);
                     } catch (NullPointerException e) {
-                        logger.info(pww.getName() + " has no any entries in warehouses.");
+//                        continue;
                     }
 
                     products.add(pww);

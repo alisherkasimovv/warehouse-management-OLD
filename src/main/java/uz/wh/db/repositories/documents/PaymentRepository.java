@@ -1,8 +1,8 @@
-package uz.wh.db.repositories;
+package uz.wh.db.repositories.documents;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import uz.wh.db.entities.documentation.Payment;
+import uz.wh.db.entities.documents.Payment;
 import uz.wh.db.enums.PaymentType;
 
 import java.util.List;

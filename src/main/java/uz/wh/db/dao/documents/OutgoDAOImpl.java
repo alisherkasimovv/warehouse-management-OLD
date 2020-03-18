@@ -1,25 +1,29 @@
-package uz.wh.db.dao;
+package uz.wh.db.dao.documents;
 
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
-import uz.wh.db.dao.interfaces.ItemDAO;
 import uz.wh.db.dao.interfaces.OutgoDAO;
-import uz.wh.db.dto.OutgoWithItemsDTO;
-import uz.wh.db.entities.documentation.Outgo;
-import uz.wh.db.repositories.OutgoRepository;
+import uz.wh.db.dao.interfaces.WarehouseItemDAO;
+import uz.wh.db.dto.documents_dto.OutgoWithItemsDTO;
+import uz.wh.db.entities.documents.Outgo;
+import uz.wh.db.entities.documents.items.OutgoItem;
+import uz.wh.db.repositories.documents.OutgoItemRepository;
+import uz.wh.db.repositories.documents.OutgoRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class OutgoDAOImpl implements OutgoDAO {
 
     private OutgoRepository repository;
-    private ItemDAO itemDAO;
+    private OutgoItemRepository itemRepository;
+    private WarehouseItemDAO warehouseItemDAO;
 
-    public OutgoDAOImpl(OutgoRepository repository,ItemDAO itemDAO) {
-        this.repository=repository;
-        this.itemDAO=itemDAO;
+    public OutgoDAOImpl(OutgoRepository repository, OutgoItemRepository itemRepository, WarehouseItemDAO warehouseItemDAO) {
+        this.repository = repository;
+        this.itemRepository = itemRepository;
+        this.warehouseItemDAO = warehouseItemDAO;
     }
 
     @Override
@@ -43,8 +47,8 @@ public class OutgoDAOImpl implements OutgoDAO {
     }
 
     @Override
-    public Outgo getByOrderedDate(LocalDateTime date) {
-        return repository.findByOrderDate(date);
+    public Outgo getByOrderedDate(LocalDate date) {
+        return repository.findByDocumentDate(date);
     }
 
     @Override
@@ -52,32 +56,18 @@ public class OutgoDAOImpl implements OutgoDAO {
         Outgo saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         Outgo temp = outgo.getOutgo();
-        itemDAO.saveItemList(
-                outgo.getItems(),
-                outgo.getOutgo().getId(),
-                outgo.getOutgo().getDocumentType(),
-                outgo.getWarehouseId()
-        );
 
-//        if (temp != null) {
-//            temp.setDeleted(false);
-//            temp.setDocumentNo(outgo.getDocumentNo());
-//            temp.setCustomerId(outgo.getCustomerId());
-//            temp.setPrice(outgo.getPrice());
-//
-//            saved = repository.save(temp);
-//            objectAndMessage.setMessage("Outgo has been updated!");
-//        } else {
-            saved =repository.save(temp);
-            objectAndMessage.setMessage("Newe Outgo has been created!");
-//        }
+        this.registerAndSaveOutgoItem(outgo.getItems());
+        saved = repository.save(temp);
+        objectAndMessage.setMessage("Mahsulotlar chiqimi ro'yhatga olindi.");
+
         objectAndMessage.setObject(saved);
         return objectAndMessage;
     }
 
     @Override
     public ObjectAndMessage deleteById(int id) {
-        Outgo outgo=repository.findById(id);
+        Outgo outgo = repository.findById(id);
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         objectAndMessage.setMessage("Outgo has been deleted!");
         objectAndMessage.setObject(null);
@@ -85,4 +75,13 @@ public class OutgoDAOImpl implements OutgoDAO {
 
         return objectAndMessage;
     }
+
+    private void registerAndSaveOutgoItem(List<OutgoItem> list) {
+        for (OutgoItem item : list) {
+            warehouseItemDAO.registerOutgoFromWarehouse(item);
+        }
+
+        itemRepository.saveAll(list);
+    }
+
 }

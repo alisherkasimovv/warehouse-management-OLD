@@ -5,12 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.IncomeDAO;
-import uz.wh.db.dto.IncomeWithItemsDTO;
-import uz.wh.db.entities.Vendor;
-import uz.wh.db.entities.documentation.Income;
+import uz.wh.db.dto.documents_dto.IncomeWithItemsDTO;
+import uz.wh.db.entities.documents.Income;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController

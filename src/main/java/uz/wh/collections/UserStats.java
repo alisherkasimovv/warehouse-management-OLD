@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import uz.wh.db.entities.documentation.*;
+import uz.wh.db.entities.documents.*;
 
 @AllArgsConstructor
 @NoArgsConstructor

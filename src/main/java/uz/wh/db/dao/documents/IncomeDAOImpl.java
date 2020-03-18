@@ -1,25 +1,29 @@
-package uz.wh.db.dao;
+package uz.wh.db.dao.documents;
 
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.IncomeDAO;
-import uz.wh.db.dao.interfaces.ItemDAO;
-import uz.wh.db.dto.IncomeWithItemsDTO;
-import uz.wh.db.entities.documentation.Income;
-import uz.wh.db.repositories.IncomeRepository;
+import uz.wh.db.dao.interfaces.WarehouseItemDAO;
+import uz.wh.db.dto.documents_dto.IncomeWithItemsDTO;
+import uz.wh.db.entities.documents.Income;
+import uz.wh.db.entities.documents.items.IncomeItem;
+import uz.wh.db.repositories.documents.IncomeItemRepository;
+import uz.wh.db.repositories.documents.IncomeRepository;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
 public class IncomeDAOImpl implements IncomeDAO {
 
-    IncomeRepository repository;
-    ItemDAO itemDAO;
-    public IncomeDAOImpl(IncomeRepository incomeRepository,ItemDAO itemDAO1) {
+    private IncomeRepository repository;
+    private IncomeItemRepository itemRepository;
+    private WarehouseItemDAO warehouseItemDAO;
+
+    public IncomeDAOImpl(IncomeRepository incomeRepository, IncomeItemRepository itemRepository, WarehouseItemDAO warehouseItemDAO) {
         repository = incomeRepository;
-        itemDAO=itemDAO1;
+        this.itemRepository = itemRepository;
+        this.warehouseItemDAO = warehouseItemDAO;
     }
 
     @Override
@@ -33,8 +37,8 @@ public class IncomeDAOImpl implements IncomeDAO {
     }
 
     @Override
-    public Income getByDate(LocalDateTime date) {
-        return repository.findByOrderDate(date);
+    public Income getByDate(LocalDate date) {
+        return repository.findByDocumentDate(date);
     }
 
     @Override
@@ -51,32 +55,20 @@ public class IncomeDAOImpl implements IncomeDAO {
     public ObjectAndMessage save(IncomeWithItemsDTO incomeWithItems) {
         Income saved;
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
-        itemDAO.saveItemList(
-                incomeWithItems.getItems(),
-                incomeWithItems.getIncome().getId(),
-                incomeWithItems.getIncome().getDocumentType(),
-                incomeWithItems.getWarehouseId());
 
         Income temp = incomeWithItems.getIncome();
+        this.saveAndRegisterIncomeItems(incomeWithItems.getItems());
 
-//        if (temp != null) {
-//            temp.setDeleted(false);
-//            temp.setBalance(income.getBalance());
-//            temp.setCost(income.getCost());
-//            temp.setDocumentNo(income.getDocumentNo());
-//            saved = repository.save(temp);
-//            objectAndMessage.setMessage("Income has been updated!");
-//        } else {
-            saved =repository.save(temp);
-            objectAndMessage.setMessage("Income has been created!");
-//        }
+        saved = repository.save(temp);
+        objectAndMessage.setMessage("Mahsulotlar kirimi ro'yhatdan o'tkazildi.");
+
         objectAndMessage.setObject(saved);
         return objectAndMessage;
     }
 
     @Override
     public ObjectAndMessage deleteById(int id) {
-        Income income=repository.findById(id);
+        Income income = repository.findById(id);
         ObjectAndMessage objectAndMessage = new ObjectAndMessage();
         objectAndMessage.setMessage("Income has been deleted!");
         income.setDeleted(true);
@@ -85,5 +77,11 @@ public class IncomeDAOImpl implements IncomeDAO {
         return objectAndMessage;
     }
 
+    private void saveAndRegisterIncomeItems(List<IncomeItem> list) {
+        for (IncomeItem item : list) {
+            warehouseItemDAO.registerIncomeToWarehouse(item);
+        }
+        itemRepository.saveAll(list);
+    }
 
 }

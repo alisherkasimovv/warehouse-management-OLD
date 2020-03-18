@@ -3,7 +3,9 @@ package uz.wh.db.dao;
 import org.springframework.stereotype.Service;
 import uz.wh.db.dao.interfaces.WarehouseItemDAO;
 import uz.wh.db.entities.WarehouseItem;
-import uz.wh.db.entities.documentation.Item;
+import uz.wh.db.entities.documents.items.IncomeItem;
+import uz.wh.db.entities.documents.items.OutgoItem;
+import uz.wh.db.entities.documents.items.ReturnProductItem;
 import uz.wh.db.repositories.WarehouseItemRepository;
 
 import java.util.List;
@@ -35,23 +37,21 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
     /**
      * Method registers income of the item to chosen warehouse.
      *
-     * @param item Registering item.
-     * @param warehouseId Chosen warehouse id.
+     * @param item Registering incoming item.
      */
     @Override
-    public void registerIncomeToWarehouse(Item item, int warehouseId) {
+    public void registerIncomeToWarehouse(IncomeItem item) {
         WarehouseItem wItem =
-                repository.findByWarehouseIdAndProductIdAndDeletedFalse(warehouseId, item.getId());
+                repository.findByWarehouseIdAndProductIdAndDeletedFalse(item.getWarehouseId(), item.getId());
 
         if (wItem != null) {
             wItem.setQuantity(wItem.getQuantity() + item.getQuantity());
         } else {
             wItem = new WarehouseItem();
             wItem.setProductId(item.getProductId());
-            wItem.setWarehouseId(warehouseId);
+            wItem.setWarehouseId(item.getWarehouseId());
             wItem.setQuantity(item.getQuantity());
             wItem.setCost(item.getCost());
-            wItem.setPrice(item.getPrice());
         }
         repository.save(wItem);
 
@@ -60,13 +60,12 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
     /**
      * Method registers outgo of item from chosen warehouse.
      *
-     * @param item Registering item object.
-     * @param warehouseId Chosen warehouse id.
+     * @param item Registering outgo item object.
      */
     @Override
-    public void registerOutgoFromWarehouse(Item item, int warehouseId) {
+    public void registerOutgoFromWarehouse(OutgoItem item) {
         WarehouseItem wItem =
-                repository.findByWarehouseIdAndProductIdAndDeletedFalse(warehouseId, item.getProductId());
+                repository.findByWarehouseIdAndProductIdAndDeletedFalse(item.getWarehouseId(), item.getProductId());
 
         if (wItem != null) {
             if (wItem.getQuantity() < item.getQuantity()) return;
@@ -83,6 +82,25 @@ public class WarehouseItemDAOImpl implements WarehouseItemDAO {
         }
         repository.save(wItem);
 
+    }
+
+    /**
+     * Method adds returned product to warehouse.
+     *
+     * @param item Returned item.
+     */
+    @Override
+    public void registerReturnToWarehouse(ReturnProductItem item) {
+        WarehouseItem wItem =
+                repository.findByWarehouseIdAndProductIdAndDeletedFalse(item.getWarehouseId(), item.getProductId());
+
+        if (wItem != null) {
+            wItem.setQuantity(wItem.getQuantity() + item.getQuantity());
+        } else {
+            return;
+        }
+
+        repository.save(wItem);
     }
 
     @Override

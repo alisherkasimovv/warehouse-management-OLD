@@ -1,10 +1,9 @@
-package uz.wh.db.repositories;
+package uz.wh.db.repositories.documents;
 
-import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
-import uz.wh.db.entities.documentation.Income;
+import uz.wh.db.entities.documents.Income;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IncomeRepository extends JpaRepository<Income,Integer> {
@@ -14,6 +13,6 @@ public interface IncomeRepository extends JpaRepository<Income,Integer> {
     Income findById(int id);
     Income findByDocumentNo(String documentNo);
     Income findByVendorId(int i);
-    Income findByOrderDate(LocalDateTime date);
+    Income findByDocumentDate(LocalDate date);
 
 }
