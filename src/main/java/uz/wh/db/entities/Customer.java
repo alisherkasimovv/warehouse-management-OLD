@@ -9,27 +9,34 @@ import uz.wh.db.entities.base.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "db_vendors")
+@Table(name = "db_customers")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Vendor extends BaseEntity {
+public class Customer extends BaseEntity {
 
     @Nullable
-    @Column
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
 
     @Nullable
-    @Column
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Nullable
+    @Column(name = "phone")
     private String phone;
 
     @Nullable
-    @Column
+    @Column(name = "address")
     private String address;
+
+    @Nullable
+    @Column(name = "description")
+    private String description;
 
 }

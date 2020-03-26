@@ -14,12 +14,11 @@ public class VendorDAOImpl implements VendorDAO {
 
     public VendorDAOImpl(VendorRepository vendorRepository) {
         this.vendorRepository = vendorRepository;
-
     }
 
     @Override
     public List<Vendor> getAll() {
-        return vendorRepository.findAll();
+        return vendorRepository.findAllByDeletedFalse();
     }
 
     @Override

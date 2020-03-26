@@ -1,23 +1,29 @@
 package uz.wh.db.entities;
 
-import lombok.Data;
-//import org.springframework.security.core.GrantedAuthority;
-import uz.wh.db.enums.UserType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
-@Data
 @Entity(name = "db_roles")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class Role  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Enumerated(EnumType.STRING)
-    private UserType type;
+    @Column(name = "name")
+    private String name;
 
-//    @Override
-//    public String getAuthority() {
-//        return type.name();
-//    }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<User> users;
+
 }

@@ -8,13 +8,9 @@ import org.springframework.lang.Nullable;
 import uz.wh.db.entities.base.BaseEntity;
 import uz.wh.db.enums.UserType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
-//import org.springframework.security.core.GrantedAuthority;
-//import org.springframework.security.core.userdetails.UserDetails;
+import javax.persistence.*;
+import javax.validation.constraints.Size;
+import java.util.List;
 
 @Getter
 @Setter
@@ -23,6 +19,7 @@ import javax.persistence.Enumerated;
 @Entity(name = "db_users")
 public class User extends BaseEntity {
 
+    @Size(max = 50)
     @Column(name = "username", unique = true)
     private String username;
 
@@ -35,43 +32,20 @@ public class User extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "phone_number")
+    @Column(name = "phone")
     private String phone;
-
-    @Column(name = "address")
-    private String address;
 
     @Nullable
     @Column(name = "user_type")
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-}
-//    @ManyToMany
-//    private List<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
+    )
+    private List<Role> roles;
 
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return roles;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isAccountNonLocked() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isCredentialsNonExpired() {
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean isEnabled() {
-//        return true;
-//    }
-//}
+}

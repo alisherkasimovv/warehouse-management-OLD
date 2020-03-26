@@ -2,6 +2,7 @@ package uz.wh.controllers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.wh.collections.ObjectAndMessage;
 import uz.wh.db.dao.interfaces.PaymentDAO;
@@ -22,11 +23,13 @@ public class PaymentController {
     }
 
     @GetMapping(value = "/get")
+    @PreAuthorize("hasAnyRole('ROLE_SUPERUSER', 'ROLE_DIRECTOR')")
     public ResponseEntity<List<Payment>> getAllPayments() {
         return new ResponseEntity<>(paymentDAO.getAllAvailablePayments(), HttpStatus.OK);
     }
 
     @PostMapping(value = "/accept")
+    @PreAuthorize("hasAnyRole('ROLE_SUPERUSER', 'ROLE_DIRECTOR')")
     public ResponseEntity<ObjectAndMessage> acceptPayment(@Valid @RequestBody Payment payment) {
         return new ResponseEntity<>(paymentDAO.acceptPayment(payment), HttpStatus.OK);
     }

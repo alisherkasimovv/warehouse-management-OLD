@@ -1,34 +1,36 @@
 -- DB_USERS TABLE
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (23, null, 1, false, null, 1, '15 School Pass', 'Morgun', 'Standish', 'YL6gtvV', '(263) 9796363', 'CUSTOMER', 'mstandishm');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (26, null, 1, false, null, 1, '47680 Center Plaza', 'Lena', 'Bletso', 'vpXn9mump', '(651) 4288819', 'CUSTOMER', 'lbletsop');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (27, null, 1, false, null, 1, '3 Londonderry Street', 'Geraldine', 'Hubane', 'BpYedy7', '(272) 8098178', 'CUSTOMER', 'ghubaneq');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (5, null, 1, false, null, 1, '332 Mccormick Crossing', 'Rutter', 'Mathet', 'QpSKlI7mi55l', '(695) 7620479', 'STOREKEEPER', 'rmathet4');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (6, null, 1, false, null, 1, '23101 Anzinger Crossing', 'Anna-maria', 'Camamile', 'c8JneH2VJgr', '(117) 3402487', 'STOREKEEPER', 'acamamile5');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (3, null, 1, false, null, 1, '5939 Green Ridge Hill', 'Francesca', 'Kinghorn', 'uzrdZ7fa', '(226) 9503635', 'STOREKEEPER', 'fkinghorn2');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (2, null, 1, false, null, 1, '7 Lerdahl Place', 'Amargo', 'Hooks', '4hx20c78y', '(482) 1547802', 'STOREKEEPER', 'ahooks1');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (25, null, 1, false, null, 1, '12 Dorton Court', 'Fanya', 'McCarney', 'fwI5CY', '(360) 3342573', 'CUSTOMER', 'fmccarneyo');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (24, null, 1, false, null, 1, '282 Northfield Point', 'Fania', 'Dominka', 'p4QjRsb', '(256) 5138192', 'CUSTOMER', 'fdominkan');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (7, null, 1, false, null, 1, '98 Golf View Terrace', 'Clarice', 'Zettoi', 'J32Q05w', '(520) 8850781', 'STOREKEEPER', 'czettoi6');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (30, null, 1, false, null, 1, '99 Springview Point', 'Jone', 'Parrott', '1WSsWib04i', '(657) 8931146', 'CUSTOMER', 'jparrottt');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (29, null, 1, false, null, 1, '985 Buell Plaza', 'Marilyn', 'McRavey', 'vChUX1FeMr', '(978) 6608153', 'CUSTOMER', 'mmcraveys');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (28, null, 1, false, null, 1, '07548 Victoria Road', 'Alvie', 'Rembrandt', 'MHquvuApGLS', '(217) 8291792', 'CUSTOMER', 'arembrandtr');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (19, null, 1, false, null, 1, '76095 Bunker Hill Crossing', 'Rinaldo', 'Kelso', 'A5lxvcVgo', '(949) 7014247', 'CUSTOMER', 'rkelsoi');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (18, null, 1, false, null, 1, '6029 Cherokee Crossing', 'Cissy', 'Coulling', 'IHaTNFS6cdnz', '(782) 9823196', 'CUSTOMER', 'ccoullingh');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (17, null, 1, false, null, 1, '9268 Hansons Way', 'Gustave', 'Willars', 'rFgO5Apo', '(490) 4228676', 'CUSTOMER', 'gwillarsg');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (16, null, 1, false, null, 1, '012 Cambridge Junction', 'Toma', 'Caldecutt', '6jccntrW', '(667) 7135812', 'CUSTOMER', 'tcaldecuttf');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (1, null, 1, false, null, 1, '4 Clove Park', 'Seymour', 'Tiffin', 'X5qSE429biQ', '(465) 1754828', 'DIRECTOR', 'stiffin0');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (22, null, 1, false, null, 1, '77398 Kensington Place', 'Lauren', 'MacPadene', 'qRDbO3p10UMA', '(517) 2735623', 'CUSTOMER', 'lmacpadenel');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (21, null, 1, false, null, 1, '54571 Carpenter Avenue', 'Ricard', 'Sigge', 'vnfrunf5PvA', '(162) 9060350', 'CUSTOMER', 'rsiggek');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (20, null, 1, false, null, 1, '750 Scofield Alley', 'Nester', 'Rew', 'sjCqmlZI346B', '(792) 6147885', 'CUSTOMER', 'nrewj');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (4, null, 1, false, null, 1, '48743 Rutledge Terrace', 'Agustin', 'Wannell', 'HepbFiea', '(332) 6557494', 'STOREKEEPER', 'awannell3');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (10, null, 1, false, null, 1, '14617 Maple Wood Street', 'Hedda', 'Backs', 'BudIAT3zxuMH', '(230) 3809656', 'CUSTOMER', 'hbacks9');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (9, null, 1, false, null, 1, '4450 Vahlen Way', 'Ancell', 'Griffin', 'jvmO2ulV', '(595) 5350017', 'CUSTOMER', 'agriffin8');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (8, null, 1, false, null, 1, '17310 Mendota Junction', 'Bobbette', 'Cisland', 'RWPMgwL6o', '(582) 9476715', 'CUSTOMER', 'bcisland7');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (15, null, 1, false, null, 1, '5649 Forest Run Point', 'Munroe', 'Saladino', 'PYOi65C', '(990) 9695130', 'CUSTOMER', 'msaladinoe');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (14, null, 1, false, null, 1, '2 Harper Place', 'Aloysius', 'Hatcliffe', '2YiHPthLuP3', '(347) 6700430', 'CUSTOMER', 'ahatcliffed');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (13, null, 1, false, null, 1, '9682 Manufacturers Circle', 'Herculie', 'Oughtright', 'ThSoVfcGj0K', '(545) 5028303', 'CUSTOMER', 'houghtrightc');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (12, null, 1, false, null, 1, '4 Duke Drive', 'Gabi', 'Haining', 'mX7SK7cqrx5', '(451) 7830968', 'CUSTOMER', 'ghainingb');
-INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, address, first_name, last_name, password, phone_number, user_type, username) VALUES (11, null, 1, false, null, 1, '13387 Schiller Crossing', 'Diena', 'Belsher', 'hBCDQl', '(441) 3767598', 'CUSTOMER', 'dbelshera');
+-- ADMINISTRATOR \\ LOGIN: admin PASSWORD: qwerty
+INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, first_name, last_name, password, phone, user_type, username) VALUES (1, null, 1, false, null, 1, 'Seymour', 'Tiffin', '$2a$04$HlGNBMNGbXWd11zpMb.VC.xCOuWcrbnaCGTmtUf1fsN.cE2Nqy/3G', '(465) 1754828', 'SUPERUSER', 'admin');
+INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, first_name, last_name, password, phone, user_type, username) VALUES (2, null, 1, false, null, 1, 'Amargo', 'Hooks', '4hx20c78y', '(482) 1547802', 'STOREKEEPER', 'ahooks1');
+INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, first_name, last_name, password, phone, user_type, username) VALUES (3, null, 1, false, null, 1, 'Francesca', 'Kinghorn', 'uzrdZ7fa', '(226) 9503635', 'STOREKEEPER', 'fkinghorn2');
+INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, first_name, last_name, password, phone, user_type, username) VALUES (4, null, 1, false, null, 1, 'Agustin', 'Wannell', 'HepbFiea', '(332) 6557494', 'STOREKEEPER', 'awannell3');
+INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, first_name, last_name, password, phone, user_type, username) VALUES (5, null, 1, false, null, 1, 'Rutter', 'Mathet', 'QpSKlI7mi55l', '(695) 7620479', 'STOREKEEPER', 'rmathet4');
+INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, first_name, last_name, password, phone, user_type, username) VALUES (6, null, 1, false, null, 1, 'Anna-maria', 'Camamile', 'c8JneH2VJgr', '(117) 3402487', 'STOREKEEPER', 'acamamile5');
+INSERT INTO public.db_users (id, created_at, created_by, is_deleted, updated_at, updated_by, first_name, last_name, password, phone, user_type, username) VALUES (7, null, 1, false, null, 1, 'Clarice', 'Zettoi', 'J32Q05w', '(520) 8850781', 'STOREKEEPER', 'czettoi6');
+
+
+-- DB_CUSTOMERS table
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (1, 'Otto', 'Newcom', '(143) 8079818', '6 Independence Point', 'generate killer schemas', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (2, 'Jase', 'Taylot', '(587) 7233300', '93978 Roxbury Street', 'integrate killer action-items', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (3, 'Devonne', 'Leyshon', '(609) 2702352', '041 Hermina Point', 'matrix best-of-breed infrastructures', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (4, 'Linn', 'McCrone', '(414) 7370406', '08 Fairview Terrace', 'cultivate distributed e-business', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (5, 'Tyson', 'Riglar', '(387) 9994449', '3007 Everett Avenue', 'harness virtual web services', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (6, 'Esta', 'Kleisle', '(586) 5932870', '80 West Drive', 'monetize impactful eyeballs', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (7, 'Sallyanne', 'Petheridge', '(752) 2028779', '38 Schmedeman Road', 'recontextualize collaborative interfaces', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (8, 'Sydney', 'Roussell', '(884) 1388753', '522 Nobel Place', 'architect back-end eyeballs', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (9, 'Addy', 'Denington', '(759) 9977263', '75126 Kedzie Alley', 'deploy e-business platforms', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (10, 'Gwenni', 'Scrivens', '(178) 2408892', '476 Hintze Plaza', 'scale distributed paradigms', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (11, 'Markus', 'Strut', '(988) 8321638', '447 Trailsway Lane', 'aggregate innovative content', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (12, 'Lucien', 'Waberer', '(276) 1734824', '43 Express Point', 'synthesize turn-key infrastructures', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (13, 'Cornell', 'Pimlett', '(668) 1358748', '367 Carey Parkway', 'deliver turn-key solutions', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (14, 'Luci', 'Grichukhin', '(114) 8526767', '7 Ohio Road', 'target B2B action-items', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (15, 'Curtis', 'Bourhill', '(161) 8838494', '6243 Norway Maple Parkway', 'monetize viral paradigms', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (16, 'Denys', 'Sinnock', '(996) 3468381', '336 Crescent Oaks Crossing', 'harness killer technologies', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (17, 'Stevana', 'Begent', '(793) 5735846', '91119 Weeping Birch Place', 'revolutionize robust markets', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (18, 'Blithe', 'Rean', '(770) 4039189', '33 Stoughton Point', 'syndicate mission-critical infomediaries', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (19, 'Carolee', 'Duplock', '(722) 7570495', '10 Haas Place', 'transform wireless users', 0,0);
+insert into db_customers (id, first_name, last_name, phone, address, description, created_by, updated_by) values (20, 'Daveen', 'Jirek', '(469) 7360842', '0261 3rd Avenue', 'repurpose clicks-and-mortar ROI', 0,0);
+
 
 -- DB_VENDORS table
 insert into db_vendors (id, name, address, phone, created_by, updated_by) values (1, 'Trunyx', '84 Dorton Center', '(418) 9920616', 1,1);
@@ -1107,3 +1109,17 @@ insert into db_warehouse (id, name, address, created_by, updated_by) values (7, 
 insert into db_warehouse (id, name, address, created_by, updated_by) values (8, 'Lee Enterprises, Incorporated', '337 Utah Drive', 1, 1);
 insert into db_warehouse (id, name, address, created_by, updated_by) values (9, 'Fidelity National Financial, Inc.', '4018 Hallows Way', 1, 1);
 insert into db_warehouse (id, name, address, created_by, updated_by) values (10, 'Fastenal Company', '5266 Di Loreto Lane', 1, 1);
+
+
+-- Main roles in the system
+INSERT INTO public.db_roles (id, name) VALUES (1, 'ROLE_SUPERUSER');
+INSERT INTO public.db_roles (id, name) VALUES (2, 'ROLE_ADMIN');
+INSERT INTO public.db_roles (id, name) VALUES (3, 'ROLE_STOREKEEPER');
+INSERT INTO public.db_roles (id, name) VALUES (4, 'ROLE_USER');
+
+
+-- Initial role assignment
+INSERT INTO public.user_roles (user_id, role_id) VALUES (1, 1);
+INSERT INTO public.user_roles (user_id, role_id) VALUES (1, 2);
+INSERT INTO public.user_roles (user_id, role_id) VALUES (1, 3);
+INSERT INTO public.user_roles (user_id, role_id) VALUES (1, 4);

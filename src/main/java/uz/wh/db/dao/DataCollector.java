@@ -1,7 +1,5 @@
 package uz.wh.db.dao;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import uz.wh.collections.UserStats;
 import uz.wh.db.dao.interfaces.*;
@@ -27,8 +25,6 @@ public class DataCollector {
     private ProductDAO productDAO;
     private WarehouseDAO warehouseDAO;
     private EntityManager em;
-
-    private Logger logger = LoggerFactory.getLogger(DataCollector.class);
 
     public DataCollector(
             IncomeDAO incomeDAO,
