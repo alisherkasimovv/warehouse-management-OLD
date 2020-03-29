@@ -43,7 +43,7 @@ public class ProductDAOImpl implements ProductDAO {
 
     @Override
     public List<Product> getAll() {
-        return productRepository.findAll();
+        return productRepository.findAllByDeletedFalse();
     }
 
     @Override
